@@ -8,5 +8,10 @@ namespace Shared
         {
             return new UnityEngine.Vector3(vector.X, vector.Y, vector.Z);
         }
+
+        public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
+        {
+            return a + (b - a) * t;
+        }
     }
 }
