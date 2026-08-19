@@ -30,9 +30,15 @@ namespace Shared
             return center + new Vector3(x, y, z) * radius;
         }
         
-        public static bool ApproximatelyEqual(Vector3 a, Vector3 b, float tolerance = 0.001f)
+        public static bool ApproximatelyEqual(Vector3 a, Vector3 b)
         {
-            return Vector3.DistanceSquared(a, b) <= tolerance * tolerance;
+            const float tolerance = 0.001f;
+            return IsWithinRadius(a, b, tolerance);
         }
+
+        public static bool IsWithinRadius(Vector3 a, Vector3 b, float radius)
+        {
+            return Vector3.DistanceSquared(a, b) <= radius * radius;
+        } 
     }
 }

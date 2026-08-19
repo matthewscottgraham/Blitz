@@ -1,5 +1,6 @@
 using System;
 using Game.Simulation;
+using Game.Simulation.Entities;
 using Shared;
 using UnityEngine;
 
@@ -12,7 +13,9 @@ namespace Game.View
         private const float EntityRadius = 0.1f;
         
         private readonly Color _blue = Color.blue;
+        private readonly Color _cyan = Color.cyan;
         private readonly Color _red = Color.red;
+        private readonly Color _magenta = Color.magenta;
         
         private IMatch _match;
 
@@ -24,32 +27,30 @@ namespace Game.View
         private void OnDrawGizmos()
         {
             if (_match == null) return;
-            DrawField();
-            DrawBall(_match.BallPosition.ToUnityVector());
+            DrawGoal(_match.GoalPosition(0).ToUnityVector(), _cyan);
+            DrawGoal(_match.GoalPosition(1).ToUnityVector(), _magenta);
+            DrawBall(_match.Ball.CurrentPosition.ToUnityVector());
             DrawTeam(_match.GetTeam(0).Players, _blue);
             DrawTeam(_match.GetTeam(1).Players, _red);
         }
 
-        private void DrawField()
+        private void DrawGoal(Vector3 goalPosition, Color color)
         {
-            Gizmos.color = Color.white;
-            var goldenAngle = Mathf.PI * (3f - Mathf.Sqrt(5f));
-
-            for (var i = 0; i < BoundaryMarkerCount; i++)
+            Gizmos.color = color;
+            for (var i = 0; i < 12; i++)
             {
-                // Y goes from 1 to -1
-                var y = 1f - (i / (float)(BoundaryMarkerCount - 1)) * 2f;
+                var angle = i * (MathF.PI * 2f / 12);
 
-                var radiusAtY = Mathf.Sqrt(1f - y * y);
+                var offset = new Vector3(
+                    MathF.Cos(angle) * _match.GoalRadius,
+                    MathF.Sin(angle) * _match.GoalRadius,
+                    0f
+                );
 
-                var theta = goldenAngle * i;
-
-                var x = Mathf.Cos(theta) * radiusAtY;
-                var z = Mathf.Sin(theta) * radiusAtY;
-
-                var point = new Vector3(x, y, z) * _match.FieldRadius;
-
-                Gizmos.DrawSphere(transform.position + point, BoundaryMarkerRadius);
+                Gizmos.DrawSphere(
+                    goalPosition + offset,
+                    0.1f
+                );    
             }
         }
 

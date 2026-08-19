@@ -1,3 +1,5 @@
+using Game.Simulation.Entities;
+
 namespace Game.Simulation
 {
     public interface IPlayerFactory

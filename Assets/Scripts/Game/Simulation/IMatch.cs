@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using Game.Simulation.Entities;
 
 namespace Game.Simulation
 {
@@ -8,8 +9,10 @@ namespace Game.Simulation
         public float SimulationSpeed { get; }
         Random Random { get; }
         float FieldRadius { get; }
-        Vector3 BallPosition { get; }
+        float GoalRadius { get; }
+        SimulationEntity Ball { get; }
         Team GetTeam(int index);
+        Vector3 GoalPosition(int teamIndex);
         
         void StartMatch();
         void PauseMatch();

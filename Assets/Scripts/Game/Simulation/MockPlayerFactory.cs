@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Game.Simulation.Entities;
+using Game.Simulation.Strategies;
 
 namespace Game.Simulation
 {
     public class MockPlayerFactory: IPlayerFactory
     {
+        private readonly IStrategyFactory _strategyFactory = new MockStrategyFactory();
+
         public Team GetNewTeam()
         {
             var players = new SimulationEntity[]
@@ -21,15 +25,19 @@ namespace Game.Simulation
 
         public Player GetNewPlayer(PlayerRole role)
         {
-            return new Player(GetRandomPlayerStats(), role);
+            var player = new Player(GetRandomPlayerStats(), role);
+            player.SetStrategies(_strategyFactory.GetStrategies());
+            return player;
         }
 
         private PlayerStats GetRandomPlayerStats()
         {
             var random = new Random();
-            var playerStats = new PlayerStats();
-            playerStats.Acceleration = random.Next(1, 11);
-            playerStats.TopSpeed = random.Next(1, 11);
+            var playerStats = new PlayerStats
+            {
+                Intercept = random.Next(1, 11),
+                TopSpeed = random.Next(1, 3)
+            };
             return playerStats;
         }
     }

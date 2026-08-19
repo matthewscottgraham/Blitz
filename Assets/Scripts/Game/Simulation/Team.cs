@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Simulation.Entities;
 
 namespace Game.Simulation
 {
