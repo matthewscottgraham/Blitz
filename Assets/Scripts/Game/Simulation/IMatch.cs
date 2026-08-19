@@ -11,8 +11,11 @@ namespace Game.Simulation
         float FieldRadius { get; }
         float GoalRadius { get; }
         SimulationEntity Ball { get; }
+        public int[]  Points { get; }
+        
         Team GetTeam(int index);
         Vector3 GoalPosition(int teamIndex);
+        void AddPoint(int teamIndex);
         
         void StartMatch();
         void PauseMatch();

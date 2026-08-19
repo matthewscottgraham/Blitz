@@ -8,6 +8,7 @@ namespace Game.Simulation.Entities
         
         public Vector3 CurrentPosition { get; protected set; }
         public Vector3 TargetPosition { get; protected set; }
+        public Vector3 StartPosition { get; protected set; } = Vector3.Zero;
 
         public abstract void SetMatch(IMatch match, int team = -1);
         
@@ -18,5 +19,11 @@ namespace Game.Simulation.Entities
             TargetPosition = targetPosition;
         }
         
+        protected void ResetPosition()
+        {
+            SetTargetPosition(StartPosition);
+            CurrentPosition = StartPosition;
+            P = 0;
+        }
     }
 }

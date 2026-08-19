@@ -23,6 +23,9 @@ namespace Game
             _view = gameObject.AddChild<SimulationView>();
             _view.Initialise(_model);
             _model.StartMatch();
+            
+            var HUDController = FindAnyObjectByType<HUDController>();
+            HUDController.SetMatch(_model);
         }
 
         private void Update()

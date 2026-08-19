@@ -10,6 +10,7 @@ namespace Game.Simulation
         private Team[] _teams;
         private readonly Vector3[] _goalPositions;
 
+        public int[] Points { get; }
         public float SimulationSpeed { get; } = 0.01f;
         public Random Random { get; }
         public float FieldRadius { get; } = 5f;
@@ -37,9 +38,11 @@ namespace Game.Simulation
                 }
             }
             
-            _goalPositions = new Vector3[2];
+            _goalPositions = new Vector3[_teams.Length];
             _goalPositions[0] = new Vector3(0f, 0f, -FieldRadius);
             _goalPositions[1] = new Vector3(0f, 0f, FieldRadius);
+            
+            Points = new int[_teams.Length];
         }
 
         public void Dispose()
@@ -63,6 +66,11 @@ namespace Game.Simulation
                     player.Tick(deltaTime);
                 }
             }
+        }
+
+        public void AddPoint(int teamIndex)
+        {
+            Points[teamIndex] += 1;
         }
 
         public void StartMatch()
