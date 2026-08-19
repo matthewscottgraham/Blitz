@@ -8,6 +8,6 @@ namespace Game.Simulation
         public Vector3 CurrentPosition { get; protected set; }
         public Vector3 TargetPosition { get; protected set; }
         
-        public abstract void Tick(float deltaTime);
+        public abstract void Tick(IMatch match, float deltaTime);
     }
 }

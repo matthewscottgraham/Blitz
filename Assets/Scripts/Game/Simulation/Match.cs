@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 
 namespace Game.Simulation
@@ -7,15 +8,16 @@ namespace Game.Simulation
         private readonly SimulationEntity _ball;
         private Team[] _teams;
 
+        public float SimulationSpeed { get; } = 0.01f;
+        public Random Random { get; }
+        public float FieldRadius { get; } = 5f;
         public Vector3 BallPosition => _ball.CurrentPosition;
 
-        public Team GetTeam(int teamIndex)
-        {
-            return _teams[teamIndex];
-        }
+        public Team GetTeam(int teamIndex) => _teams[teamIndex];
         
         public Match(Team[] teams)
         {
+            Random = new Random();
             _ball = new Ball();
             _teams = teams;
         }
@@ -31,12 +33,12 @@ namespace Game.Simulation
 
         public void Tick(float deltaTime)
         {
-            _ball.Tick(deltaTime);
+            _ball.Tick(this, deltaTime);
             foreach (var team in _teams)
             {
                 foreach (var player in team.Players)
                 {
-                    player.Tick(deltaTime);
+                    player.Tick(this, deltaTime);
                 }
             }
         }
