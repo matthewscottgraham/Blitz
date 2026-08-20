@@ -15,7 +15,7 @@ namespace Game.Simulation.Formations
             };
         }
 
-        public Vector3 GetStandardFormationPosition(int teamIndex, PlayerRole role)
+        private static Vector3 GetStandardFormationPosition(int teamIndex, PlayerRole role)
         {
             return role switch
             {
@@ -27,7 +27,7 @@ namespace Game.Simulation.Formations
             };
         }
 
-        public Vector3 GetVShapeFormationPosition(int teamIndex, PlayerRole role)
+        private static Vector3 GetVShapeFormationPosition(int teamIndex, PlayerRole role)
         {
             return role switch
             {
