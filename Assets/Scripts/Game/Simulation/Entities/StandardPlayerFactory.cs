@@ -14,23 +14,23 @@ namespace Game.Simulation.Entities
             _random = random;
         }
         
-        public Team GetNewTeam()
+        public Team GetNewTeam(int teamIndex)
         {
-            var players = new SimulationEntity[]
+            var players = new []
             {
-                GetNewPlayer(PlayerRole.Forward),
-                GetNewPlayer(PlayerRole.Forward),
-                GetNewPlayer(PlayerRole.Center),
-                GetNewPlayer(PlayerRole.Defense),
-                GetNewPlayer(PlayerRole.Defense),
-                GetNewPlayer(PlayerRole.Keeper)
+                GetNewPlayer(PlayerRole.Forward, teamIndex),
+                GetNewPlayer(PlayerRole.Forward, teamIndex),
+                GetNewPlayer(PlayerRole.Center, teamIndex),
+                GetNewPlayer(PlayerRole.Defense, teamIndex),
+                GetNewPlayer(PlayerRole.Defense, teamIndex),
+                GetNewPlayer(PlayerRole.Keeper, teamIndex)
             };
             return new Team(players);
         }
 
-        public SimulationEntity GetNewPlayer(PlayerRole role)
+        public SimulationEntity GetNewPlayer(PlayerRole role, int teamIndex)
         {
-            var player = new Player(GetRandomPlayerStats(), role);
+            var player = new Player(GetRandomPlayerStats(), role, teamIndex);
             player.SetLogic(_logicFactory.CreateLogicNodes(role));
             return player;
         }

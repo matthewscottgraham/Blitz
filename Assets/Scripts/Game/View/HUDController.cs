@@ -1,10 +1,9 @@
-using Game.Simulation;
+using Extensions;
 using Game.Simulation.Match;
-using Shared;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Game
+namespace Game.View
 {
     public class HUDController : MonoBehaviour
     {

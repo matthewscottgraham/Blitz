@@ -1,19 +1,11 @@
 using System;
 using Game.Simulation.Entities;
+using Game.Simulation.Formations;
 
 namespace Game.Simulation.Match
 {
     public interface IMatchFactory
     {
-        (ISimulationContext context, IMatchController controller) CreateMatch(SimulationEntity ball, Team[] teams, Random random);
-    }
-
-    public class StandardMatchFactory : IMatchFactory
-    {
-        public (ISimulationContext context, IMatchController controller) CreateMatch(SimulationEntity ball, Team[] teams, Random random)
-        {
-            var match = new StandardMatch(ball, teams, random);
-            return (match, match);
-        }
+        (ISimulationContext context, IMatchController controller) CreateMatch(IFormationFactory formationFactory, SimulationEntity ball, Team[] teams, Random random);
     }
 }

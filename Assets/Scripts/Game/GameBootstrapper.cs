@@ -1,10 +1,11 @@
+using Extensions;
 using Game.Simulation.Conditions;
 using Game.Simulation.Entities;
+using Game.Simulation.Formations;
 using Game.Simulation.Logic;
 using Game.Simulation.Match;
 using Game.Simulation.Strategies;
 using Game.View;
-using Shared;
 using UnityEngine;
 
 namespace Game
@@ -29,11 +30,13 @@ namespace Game
             ILogicFactory logicFactory = new StandardLogicFactory(strategyFactory, conditionFactory);
             IPlayerFactory playerFactory = new StandardPlayerFactory(logicFactory, random);
             IBallFactory ballFactory = new StandardBallFactory();
+            IFormationFactory formationFactory = new StandardFormationFactory();
             IMatchFactory matchFactory = new StandardMatchFactory();
             
             var match = matchFactory.CreateMatch(
+                formationFactory,
                 ballFactory.GetNewBall(), 
-                new [] {playerFactory.GetNewTeam(), playerFactory.GetNewTeam()},
+                new [] {playerFactory.GetNewTeam(0), playerFactory.GetNewTeam(1)},
                 random
                 );
             _context = match.context;

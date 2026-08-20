@@ -1,26 +1,25 @@
 using System;
-using System.Numerics;
+using Game.Simulation.Formations;
 using Game.Simulation.Logic;
 using Game.Simulation.Match;
-using Game.Simulation.Utils;
-using Shared;
+using Game.Simulation.Utilities;
 
 namespace Game.Simulation.Entities
 {
-    public class Player : SimulationEntity
+    public class Player : SimulationEntity, ITeamMember
     {
         public readonly PlayerStats Stats;
-        private PlayerRole _role;
         private LogicNode[] _logicNodes = Array.Empty<LogicNode>();
         private ISimulationContext _simulationContext;
         
         public int Team { get; private set; }
+        public PlayerRole Role { get; private set; }
 
-        public Player(PlayerStats playerStats, PlayerRole role)
+        public Player(PlayerStats playerStats, PlayerRole role, int teamIndex)
         {
             Stats = playerStats;
-            _role = role;
-            CurrentPosition = MatchUtility.GetStartingPosition(_role);
+            Role = role;
+            AssignTeam(teamIndex);
         }
         
         public override void Tick(float deltaTime)
@@ -39,8 +38,16 @@ namespace Game.Simulation.Entities
         {
             _simulationContext = simulationContext;
         }
+
+        public override void Reset()
+        {
+            var position = _simulationContext.FormationFactory.GetFormationPosition(FormationType.Standard, Team, Role);
+            SetTargetPosition(position);
+            CurrentPosition = position;
+            MoveProgress = 0;
+        }
         
-        public override void AssignTeam(int team = -1)
+        public void AssignTeam(int team)
         {
             Team = team;
         }
@@ -48,12 +55,6 @@ namespace Game.Simulation.Entities
         public void SetLogic(LogicNode[] logicNodes)
         {
             _logicNodes = logicNodes;
-        }
-
-        private void SetNewRandomPosition(ISimulationContext simulationContext)
-        {
-            TargetPosition = MathUtility.RandomPointInSphere(Vector3.Zero, simulationContext.FieldRadius, simulationContext.Random);
-            MoveProgress = 0;
         }
 
         private void MoveTowardsTarget(float deltaTime)

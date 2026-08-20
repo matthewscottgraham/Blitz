@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Shared
+namespace Extensions
 {
-    public static class GameObjectUtility
+    public static class GameObjectExtensions
     {
         public static T AddChild<T>(this GameObject go) where T : Component
         {

@@ -1,8 +1,7 @@
 using System;
-using Game.Simulation;
+using Extensions;
 using Game.Simulation.Entities;
 using Game.Simulation.Match;
-using Shared;
 using UnityEngine;
 
 namespace Game.View

@@ -1,8 +1,8 @@
 using UnityEngine.UIElements;
 
-namespace Shared
+namespace Extensions
 {
-    public static class UIUtilities
+    public static class UIExtensions
     {
         public static T AddNew<T>(this VisualElement parent, T child) where T : VisualElement
         {

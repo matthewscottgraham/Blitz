@@ -1,6 +1,5 @@
 using Game.Simulation.Entities;
 using Game.Simulation.Match;
-using UnityEngine;
 
 namespace Game.Simulation.Strategies
 {

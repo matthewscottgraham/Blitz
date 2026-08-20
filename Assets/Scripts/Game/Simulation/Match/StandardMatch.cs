@@ -1,7 +1,8 @@
 using System;
 using System.Numerics;
 using Game.Simulation.Entities;
-using Shared;
+using Game.Simulation.Formations;
+using Game.Simulation.Utilities;
 
 namespace Game.Simulation.Match
 {
@@ -10,6 +11,8 @@ namespace Game.Simulation.Match
         private bool _isPlaying = false;
         private Team[] _teams;
         private readonly Vector3[] _goalPositions;
+        
+        public IFormationFactory FormationFactory { get; }
 
         public int[] Points { get; }
         public float SimulationSpeed { get; } = 0.01f;
@@ -18,13 +21,12 @@ namespace Game.Simulation.Match
         public float GoalRadius { get; } = 1f;
         
         public Vector3 GoalPosition(int teamIndex) => _goalPositions[teamIndex];
-        
         public SimulationEntity Ball { get; }
-
         public Team GetTeam(int teamIndex) => _teams[teamIndex];
         
-        public StandardMatch(SimulationEntity ball, Team[] teams, Random random)
+        public StandardMatch(IFormationFactory formationFactory, SimulationEntity ball, Team[] teams, Random random)
         {
+            FormationFactory = formationFactory;
             Random = random;
             Ball = ball;
             Ball.SetContext(this);
@@ -35,7 +37,6 @@ namespace Game.Simulation.Match
                 foreach (var simulationEntity in teams[i].Players)
                 {
                     simulationEntity.SetContext(this);
-                    simulationEntity.AssignTeam(i);
                 }
             }
             

@@ -1,6 +1,5 @@
-using System.Numerics;
 using Game.Simulation.Match;
-using Shared;
+using Game.Simulation.Utilities;
 
 namespace Game.Simulation.Entities
 {
@@ -9,7 +8,7 @@ namespace Game.Simulation.Entities
         private const int TopSpeed = 5;
         private ISimulationContext _simulationContext;
 
-        public override void SetContext(ISimulationContext simulationContext, int team = -1)
+        public override void SetContext(ISimulationContext simulationContext)
         {
             _simulationContext = simulationContext;
         }

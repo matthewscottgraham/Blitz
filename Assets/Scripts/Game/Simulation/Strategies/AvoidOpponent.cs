@@ -1,6 +1,6 @@
 using Game.Simulation.Entities;
 using Game.Simulation.Match;
-using Shared;
+using Game.Simulation.Utilities;
 
 namespace Game.Simulation.Strategies
 {

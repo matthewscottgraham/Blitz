@@ -25,18 +25,18 @@ namespace Game.Simulation.Logic
             // TODO create different logic node profiles per PlayerRole
             return playerRole switch
             {
-                PlayerRole.Center => CreateLogicNodes(),
-                PlayerRole.Forward => CreateLogicNodes(),
-                PlayerRole.Defense => CreateLogicNodes(),
-                PlayerRole.Keeper => CreateLogicNodes(),
+                PlayerRole.Center => CreateStandardNodes(),
+                PlayerRole.Forward => CreateStandardNodes(),
+                PlayerRole.Defense => CreateStandardNodes(),
+                PlayerRole.Keeper => CreateKeeperNodes(),
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRole), playerRole, null)
             };
             
         }
 
-        private LogicNode[] CreateLogicNodes()
+        private LogicNode[] CreateStandardNodes()
         {
-            var logicNodes = new LogicNode[]
+            return new LogicNode[]
             {
                 new (
                     _conditionFactory.CreateCondition<IsOpponentCloseToPlayer>(), 
@@ -55,7 +55,25 @@ namespace Game.Simulation.Logic
                     _strategyFactory.CreateStrategy<StandGround>()
                 )
             };
-            return logicNodes;
+        }
+
+        private LogicNode[] CreateKeeperNodes()
+        {
+            return new LogicNode[]
+            {
+                new (
+                    _conditionFactory.CreateCondition<IsPlayerAbleToReachBall>(), 
+                    _strategyFactory.CreateStrategy<ChaseBall>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<IsPlayerCloseToBall>(), 
+                    _strategyFactory.CreateStrategy<InterceptBall>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<AlwaysTrue>(), 
+                    _strategyFactory.CreateStrategy<StandGround>()
+                )
+            };
         }
     }
 }

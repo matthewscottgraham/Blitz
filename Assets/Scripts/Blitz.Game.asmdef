@@ -1,0 +1,18 @@
+{
+    "name": "Blitz.Game",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5386c1a2e55034ca299e7bd6c487bc15",
+        "GUID:e71ed24fc3ccd440780e037df3375fc3",
+        "GUID:b6bba7a67344f412e988b879c1903e21"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
