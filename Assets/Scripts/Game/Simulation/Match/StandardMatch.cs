@@ -23,9 +23,9 @@ namespace Game.Simulation.Match
 
         public Team GetTeam(int teamIndex) => _teams[teamIndex];
         
-        public StandardMatch(SimulationEntity ball, Team[] teams)
+        public StandardMatch(SimulationEntity ball, Team[] teams, Random random)
         {
-            Random = new Random();
+            Random = random;
             Ball = ball;
             Ball.SetMatch(this);
             _teams = teams;
@@ -34,8 +34,7 @@ namespace Game.Simulation.Match
             {
                 foreach (var simulationEntity in teams[i].Players)
                 {
-                    var player = (Player)simulationEntity;
-                    player.SetMatch(this, i);
+                    simulationEntity.SetMatch(this, i);
                 }
             }
             
@@ -71,11 +70,6 @@ namespace Game.Simulation.Match
             CheckForGoal();
         }
 
-        public void AddPoint(int teamIndex)
-        {
-            Points[teamIndex] += 1;
-        }
-
         public void StartMatch()
         {
             _isPlaying = true;
@@ -95,19 +89,42 @@ namespace Game.Simulation.Match
         {
             
         }
+
+        public void ResetPlay()
+        {
+            Ball.Reset();
+            foreach (var team in _teams)
+            {
+                foreach (var player in team.Players)
+                {
+                    player.Reset();
+                }
+            }
+        }
         
         private void CheckForGoal()
         {
+            var scoredGoal = false;
             if (MathUtility.IsWithinRadius(Ball.CurrentPosition, GoalPosition(0), GoalRadius))
             {
                 AddPoint(1);
-                Ball.ResetPosition();
+                scoredGoal = true;
             }
             else if (MathUtility.IsWithinRadius(Ball.CurrentPosition, GoalPosition(1), GoalRadius))
             {
                 AddPoint(0);
-                Ball.ResetPosition();
+                scoredGoal = true;
             }
+
+            if (scoredGoal)
+            {
+                ResetPlay();
+            }
+        }
+        
+        private void AddPoint(int teamIndex)
+        {
+            Points[teamIndex] += 1;
         }
     }
 }

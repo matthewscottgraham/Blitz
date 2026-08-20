@@ -4,7 +4,7 @@ using Game.Simulation.Entities;
 
 namespace Game.Simulation.Match
 {
-    public interface ISimulationContext : IDisposable
+    public interface ISimulationContext
     {
         public float SimulationSpeed { get; }
         Random Random { get; }

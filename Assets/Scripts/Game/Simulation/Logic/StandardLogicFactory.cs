@@ -6,8 +6,14 @@ namespace Game.Simulation.Logic
 {
     public class StandardLogicFactory : ILogicFactory
     {
-        private readonly IStrategyFactory _strategyFactory = new StandardStrategyFactory();
-        private readonly IConditionFactory _conditionFactory = new StandardConditionFactory();
+        private readonly IStrategyFactory _strategyFactory;
+        private readonly IConditionFactory _conditionFactory;
+
+        public StandardLogicFactory(IStrategyFactory strategyFactory, IConditionFactory conditionFactory)
+        {
+            _strategyFactory = strategyFactory;
+            _conditionFactory = conditionFactory;
+        }
         
         public LogicNode CreateLogicNode(ICondition condition, IStrategy strategy)
         {

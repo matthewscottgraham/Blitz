@@ -3,7 +3,7 @@ using Game.Simulation.Match;
 
 namespace Game.Simulation.Entities
 {
-    public abstract class SimulationEntity
+    public abstract class SimulationEntity : IResettable
     {
         protected float MoveProgress = 0;
         
@@ -20,7 +20,7 @@ namespace Game.Simulation.Entities
             TargetPosition = targetPosition;
         }
         
-        public void ResetPosition()
+        public void Reset()
         {
             SetTargetPosition(StartPosition);
             CurrentPosition = StartPosition;

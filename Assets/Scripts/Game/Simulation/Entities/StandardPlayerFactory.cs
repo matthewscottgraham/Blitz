@@ -6,10 +6,12 @@ namespace Game.Simulation.Entities
     public class StandardPlayerFactory: IPlayerFactory
     {
         private readonly ILogicFactory _logicFactory;
+        private readonly Random _random;
 
-        public StandardPlayerFactory(ILogicFactory logicFactory)
+        public StandardPlayerFactory(ILogicFactory logicFactory, Random random)
         {
             _logicFactory = logicFactory;
+            _random = random;
         }
         
         public Team GetNewTeam()
@@ -35,11 +37,10 @@ namespace Game.Simulation.Entities
 
         private PlayerStats GetRandomPlayerStats()
         {
-            var random = new Random();
             var playerStats = new PlayerStats
             {
-                Intercept = random.Next(1, 11),
-                TopSpeed = random.Next(1, 3)
+                Intercept = _random.Next(1, 11),
+                TopSpeed = _random.Next(1, 3)
             };
             return playerStats;
         }
