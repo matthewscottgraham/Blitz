@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Game.Simulation.Entities;
+using Game.Simulation.Logic;
 using Game.Simulation.Strategies;
 
 namespace Game.Simulation
 {
     public class MockPlayerFactory: IPlayerFactory
     {
-        private readonly IStrategyFactory _strategyFactory = new MockStrategyFactory();
+        private readonly ILogicFactory _logicFactory = new MockLogicFactory();
 
         public Team GetNewTeam()
         {
@@ -26,7 +27,7 @@ namespace Game.Simulation
         public Player GetNewPlayer(PlayerRole role)
         {
             var player = new Player(GetRandomPlayerStats(), role);
-            player.SetStrategies(_strategyFactory.GetStrategies());
+            player.SetLogic(_logicFactory.CreateLogicNodes());
             return player;
         }
 

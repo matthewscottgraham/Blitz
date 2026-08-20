@@ -1,5 +1,6 @@
+using System;
 using System.Numerics;
-using Game.Simulation.Strategies;
+using Game.Simulation.Logic;
 using Game.Simulation.Utils;
 using Shared;
 
@@ -9,7 +10,7 @@ namespace Game.Simulation.Entities
     {
         public readonly PlayerStats Stats;
         private PlayerRole _role;
-        private IStrategy[] _strategies = new IStrategy[10];
+        private LogicNode[] _logicNodes = Array.Empty<LogicNode>();
         private IMatch _match;
         
         public int Team { get; private set; }
@@ -23,9 +24,11 @@ namespace Game.Simulation.Entities
         
         public override void Tick(float deltaTime)
         {
-            foreach (var strategy in _strategies)
+            foreach (var logicNode in _logicNodes)
             {
-                strategy?.Execute(_match, this);
+                if (logicNode.Evaluate(_match, this))
+                    break;
+
             }
             
             MoveTowardsTarget(deltaTime);
@@ -37,9 +40,9 @@ namespace Game.Simulation.Entities
             Team = team;
         }
 
-        public void SetStrategies(IStrategy[] strategies)
+        public void SetLogic(LogicNode[] logicNodes)
         {
-            _strategies = strategies;
+            _logicNodes = logicNodes;
         }
 
         private void SetNewRandomPosition(IMatch match)

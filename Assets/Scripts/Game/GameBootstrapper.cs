@@ -1,4 +1,5 @@
 using Game.Simulation;
+using Game.Simulation.Logic;
 using Game.View;
 using Shared;
 using UnityEngine;
@@ -18,14 +19,14 @@ namespace Game
         private void Play()
         {
             IPlayerFactory playerFactory = new MockPlayerFactory();
-            
+
             _model = new Match(new [] {playerFactory.GetNewTeam(), playerFactory.GetNewTeam()});
             _view = gameObject.AddChild<SimulationView>();
             _view.Initialise(_model);
             _model.StartMatch();
             
-            var HUDController = FindAnyObjectByType<HUDController>();
-            HUDController.SetMatch(_model);
+            var hudController = FindAnyObjectByType<HUDController>();
+            hudController.SetMatch(_model);
         }
 
         private void Update()

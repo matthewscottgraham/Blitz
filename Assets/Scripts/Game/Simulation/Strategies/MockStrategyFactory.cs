@@ -2,16 +2,9 @@ namespace Game.Simulation.Strategies
 {
     public class MockStrategyFactory : IStrategyFactory
     {
-        public IStrategy[] GetStrategies()
+        public IStrategy CreateStrategy<T>() where T : IStrategy, new()
         {
-            return new IStrategy[]
-            {
-                new KickBallTowardsGoal(),
-                new ChaseBall(),
-                //new InterceptBall(),
-                //new MarkPlayer(),
-                //new PassBall()
-            };
+            return new T();
         }
     }
 }
