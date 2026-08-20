@@ -18,7 +18,7 @@ namespace Game
 
         private void Play()
         {
-            IPlayerFactory playerFactory = new MockPlayerFactory();
+            IPlayerFactory playerFactory = new StandardPlayerFactory();
 
             _model = new Match(new [] {playerFactory.GetNewTeam(), playerFactory.GetNewTeam()});
             _view = gameObject.AddChild<SimulationView>();

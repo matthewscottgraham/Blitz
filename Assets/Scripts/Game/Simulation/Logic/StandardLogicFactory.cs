@@ -3,10 +3,10 @@ using Game.Simulation.Strategies;
 
 namespace Game.Simulation.Logic
 {
-    public class MockLogicFactory : ILogicFactory
+    public class StandardLogicFactory : ILogicFactory
     {
-        private readonly IStrategyFactory _strategyFactory = new MockStrategyFactory();
-        private readonly IConditionFactory _conditionFactory = new MockConditionFactory();
+        private readonly IStrategyFactory _strategyFactory = new StandardStrategyFactory();
+        private readonly IConditionFactory _conditionFactory = new StandardConditionFactory();
         
         public LogicNode CreateLogicNode(ICondition condition, IStrategy strategy)
         {

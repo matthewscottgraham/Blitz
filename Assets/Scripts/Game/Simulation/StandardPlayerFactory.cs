@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
 using Game.Simulation.Entities;
 using Game.Simulation.Logic;
-using Game.Simulation.Strategies;
 
 namespace Game.Simulation
 {
-    public class MockPlayerFactory: IPlayerFactory
+    public class StandardPlayerFactory: IPlayerFactory
     {
-        private readonly ILogicFactory _logicFactory = new MockLogicFactory();
+        private readonly ILogicFactory _logicFactory = new StandardLogicFactory();
 
         public Team GetNewTeam()
         {

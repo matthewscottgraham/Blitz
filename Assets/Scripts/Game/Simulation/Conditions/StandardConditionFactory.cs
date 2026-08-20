@@ -1,6 +1,6 @@
 namespace Game.Simulation.Conditions
 {
-    public class MockConditionFactory : IConditionFactory
+    public class StandardConditionFactory : IConditionFactory
     {
         public ICondition CreateCondition<T>() where T : ICondition, new()
         {
