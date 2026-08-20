@@ -3,9 +3,9 @@ using System.Numerics;
 using Game.Simulation.Entities;
 using Shared;
 
-namespace Game.Simulation
+namespace Game.Simulation.Match
 {
-    public class StandardMatch : IMatch
+    public class StandardMatch : ISimulationContext, IMatchController
     {
         private bool _isPlaying = false;
         private Team[] _teams;
@@ -23,10 +23,10 @@ namespace Game.Simulation
 
         public Team GetTeam(int teamIndex) => _teams[teamIndex];
         
-        public StandardMatch(Team[] teams)
+        public StandardMatch(SimulationEntity ball, Team[] teams)
         {
             Random = new Random();
-            Ball = new Ball();
+            Ball = ball;
             Ball.SetMatch(this);
             _teams = teams;
 

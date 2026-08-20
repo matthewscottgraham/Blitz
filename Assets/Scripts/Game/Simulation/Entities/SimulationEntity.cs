@@ -1,16 +1,17 @@
 using System.Numerics;
+using Game.Simulation.Match;
 
 namespace Game.Simulation.Entities
 {
     public abstract class SimulationEntity
     {
-        protected float P = 0;
+        protected float MoveProgress = 0;
         
         public Vector3 CurrentPosition { get; protected set; }
         public Vector3 TargetPosition { get; protected set; }
         public Vector3 StartPosition { get; protected set; } = Vector3.Zero;
 
-        public abstract void SetMatch(IMatch match, int team = -1);
+        public abstract void SetMatch(ISimulationContext simulationContext, int team = -1);
         
         public abstract void Tick(float deltaTime);
 
@@ -23,7 +24,7 @@ namespace Game.Simulation.Entities
         {
             SetTargetPosition(StartPosition);
             CurrentPosition = StartPosition;
-            P = 0;
+            MoveProgress = 0;
         }
     }
 }

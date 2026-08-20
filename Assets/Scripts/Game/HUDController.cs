@@ -1,4 +1,5 @@
 using Game.Simulation;
+using Game.Simulation.Match;
 using Shared;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,12 +8,12 @@ namespace Game
 {
     public class HUDController : MonoBehaviour
     {
-        private IMatch _model;
+        private ISimulationContext _model;
         private Label[] _scoreLabels;
 
-        public void SetMatch(IMatch match)
+        public void SetMatch(ISimulationContext simulationContext)
         {
-            _model = match;
+            _model = simulationContext;
         }
 
         private void Start()

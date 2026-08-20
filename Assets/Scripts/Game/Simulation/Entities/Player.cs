@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using Game.Simulation.Logic;
+using Game.Simulation.Match;
 using Game.Simulation.Utils;
 using Shared;
 
@@ -11,7 +12,7 @@ namespace Game.Simulation.Entities
         public readonly PlayerStats Stats;
         private PlayerRole _role;
         private LogicNode[] _logicNodes = Array.Empty<LogicNode>();
-        private IMatch _match;
+        private ISimulationContext _simulationContext;
         
         public int Team { get; private set; }
 
@@ -26,7 +27,7 @@ namespace Game.Simulation.Entities
         {
             foreach (var logicNode in _logicNodes)
             {
-                if (logicNode.Evaluate(_match, this))
+                if (logicNode.Evaluate(_simulationContext, this))
                     break;
 
             }
@@ -34,9 +35,9 @@ namespace Game.Simulation.Entities
             MoveTowardsTarget(deltaTime);
         }
 
-        public override void SetMatch(IMatch match, int team = -1)
+        public override void SetMatch(ISimulationContext simulationContext, int team = -1)
         {
-            _match = match;
+            _simulationContext = simulationContext;
             Team = team;
         }
 
@@ -45,21 +46,21 @@ namespace Game.Simulation.Entities
             _logicNodes = logicNodes;
         }
 
-        private void SetNewRandomPosition(IMatch match)
+        private void SetNewRandomPosition(ISimulationContext simulationContext)
         {
-            TargetPosition = MathUtility.RandomPointInSphere(Vector3.Zero, match.FieldRadius, match.Random);
-            P = 0;
+            TargetPosition = MathUtility.RandomPointInSphere(Vector3.Zero, simulationContext.FieldRadius, simulationContext.Random);
+            MoveProgress = 0;
         }
 
         private void MoveTowardsTarget(float deltaTime)
         {
-            CurrentPosition = MathUtility.Lerp(CurrentPosition, TargetPosition, P);
-            P += deltaTime * Stats.TopSpeed * _match.SimulationSpeed;
+            CurrentPosition = MathUtility.Lerp(CurrentPosition, TargetPosition, MoveProgress);
+            MoveProgress += deltaTime * Stats.TopSpeed * _simulationContext.SimulationSpeed;
             
             var hasArrived = MathUtility.ApproximatelyEqual(TargetPosition, CurrentPosition);
             if (hasArrived)
             {
-                P = 0;
+                MoveProgress = 0;
             }
         }
     }

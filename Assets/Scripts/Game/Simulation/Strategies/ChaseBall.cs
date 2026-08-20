@@ -1,13 +1,14 @@
 using Game.Simulation.Entities;
+using Game.Simulation.Match;
 using UnityEngine;
 
 namespace Game.Simulation.Strategies
 {
     public class ChaseBall : IStrategy
     {
-        public void Execute(IMatch match, Player player)
+        public void Execute(ISimulationContext simulationContext, Player player)
         {
-            player.SetTargetPosition(match.Ball.CurrentPosition);
+            player.SetTargetPosition(simulationContext.Ball.CurrentPosition);
         }
     }
 }

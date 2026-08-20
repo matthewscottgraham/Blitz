@@ -6,6 +6,6 @@ namespace Game.Simulation.Logic
     public interface ILogicFactory
     {
         LogicNode CreateLogicNode(ICondition  condition, IStrategy strategy);
-        LogicNode[] CreateLogicNodes();
+        LogicNode[] CreateLogicNodes(PlayerRole playerRole);
     }
 }

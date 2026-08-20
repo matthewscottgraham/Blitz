@@ -1,13 +1,17 @@
 using System;
-using Game.Simulation.Entities;
 using Game.Simulation.Logic;
 
-namespace Game.Simulation
+namespace Game.Simulation.Entities
 {
     public class StandardPlayerFactory: IPlayerFactory
     {
-        private readonly ILogicFactory _logicFactory = new StandardLogicFactory();
+        private readonly ILogicFactory _logicFactory;
 
+        public StandardPlayerFactory(ILogicFactory logicFactory)
+        {
+            _logicFactory = logicFactory;
+        }
+        
         public Team GetNewTeam()
         {
             var players = new SimulationEntity[]
@@ -22,10 +26,10 @@ namespace Game.Simulation
             return new Team(players);
         }
 
-        public Player GetNewPlayer(PlayerRole role)
+        public SimulationEntity GetNewPlayer(PlayerRole role)
         {
             var player = new Player(GetRandomPlayerStats(), role);
-            player.SetLogic(_logicFactory.CreateLogicNodes());
+            player.SetLogic(_logicFactory.CreateLogicNodes(role));
             return player;
         }
 

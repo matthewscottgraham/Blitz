@@ -1,10 +1,11 @@
 using Game.Simulation.Entities;
+using Game.Simulation.Match;
 
 namespace Game.Simulation.Strategies
 {
     public class Dribble : IStrategy
     {
-        public void Execute(IMatch match, Player player)
+        public void Execute(ISimulationContext simulationContext, Player player)
         {
             
         }

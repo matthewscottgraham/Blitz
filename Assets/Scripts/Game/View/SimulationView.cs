@@ -1,6 +1,7 @@
 using System;
 using Game.Simulation;
 using Game.Simulation.Entities;
+using Game.Simulation.Match;
 using Shared;
 using UnityEngine;
 
@@ -17,21 +18,21 @@ namespace Game.View
         private readonly Color _red = Color.red;
         private readonly Color _magenta = Color.magenta;
         
-        private IMatch _match;
+        private ISimulationContext _simulationContext;
 
-        public void Initialise(IMatch match)
+        public void Initialise(ISimulationContext simulationContext)
         {
-            _match = match;
+            _simulationContext = simulationContext;
         }
 
         private void OnDrawGizmos()
         {
-            if (_match == null) return;
-            DrawGoal(_match.GoalPosition(0).ToUnityVector(), _cyan);
-            DrawGoal(_match.GoalPosition(1).ToUnityVector(), _magenta);
-            DrawBall(_match.Ball.CurrentPosition.ToUnityVector());
-            DrawTeam(_match.GetTeam(0).Players, _blue);
-            DrawTeam(_match.GetTeam(1).Players, _red);
+            if (_simulationContext == null) return;
+            DrawGoal(_simulationContext.GoalPosition(0).ToUnityVector(), _cyan);
+            DrawGoal(_simulationContext.GoalPosition(1).ToUnityVector(), _magenta);
+            DrawBall(_simulationContext.Ball.CurrentPosition.ToUnityVector());
+            DrawTeam(_simulationContext.GetTeam(0).Players, _blue);
+            DrawTeam(_simulationContext.GetTeam(1).Players, _red);
         }
 
         private void DrawGoal(Vector3 goalPosition, Color color)
@@ -42,8 +43,8 @@ namespace Game.View
                 var angle = i * (MathF.PI * 2f / 12);
 
                 var offset = new Vector3(
-                    MathF.Cos(angle) * _match.GoalRadius,
-                    MathF.Sin(angle) * _match.GoalRadius,
+                    MathF.Cos(angle) * _simulationContext.GoalRadius,
+                    MathF.Sin(angle) * _simulationContext.GoalRadius,
                     0f
                 );
 

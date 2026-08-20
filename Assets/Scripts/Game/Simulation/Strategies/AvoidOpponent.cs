@@ -1,4 +1,5 @@
 using Game.Simulation.Entities;
+using Game.Simulation.Match;
 using Shared;
 
 namespace Game.Simulation.Strategies
@@ -7,9 +8,9 @@ namespace Game.Simulation.Strategies
     {
         private const float AvoidRadius = 1f;
         
-        public void Execute(IMatch match, Player player)
+        public void Execute(ISimulationContext simulationContext, Player player)
         {
-            player.SetTargetPosition(MathUtility.RandomPointInSphere(player.CurrentPosition, AvoidRadius, match.Random));
+            player.SetTargetPosition(MathUtility.RandomPointInSphere(player.CurrentPosition, AvoidRadius, simulationContext.Random));
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Game.Simulation.Conditions;
 using Game.Simulation.Strategies;
 
@@ -13,7 +14,21 @@ namespace Game.Simulation.Logic
             return new LogicNode(condition, strategy);
         }
 
-        public LogicNode[] CreateLogicNodes()
+        public LogicNode[] CreateLogicNodes(PlayerRole playerRole)
+        {
+            // TODO create different logic node profiles per PlayerRole
+            return playerRole switch
+            {
+                PlayerRole.Center => CreateLogicNodes(),
+                PlayerRole.Forward => CreateLogicNodes(),
+                PlayerRole.Defense => CreateLogicNodes(),
+                PlayerRole.Keeper => CreateLogicNodes(),
+                _ => throw new ArgumentOutOfRangeException(nameof(playerRole), playerRole, null)
+            };
+            
+        }
+
+        private LogicNode[] CreateLogicNodes()
         {
             var logicNodes = new LogicNode[]
             {

@@ -1,15 +1,16 @@
 using Game.Simulation.Entities;
+using Game.Simulation.Match;
 using Shared;
 
 namespace Game.Simulation.Strategies
 {
     public class KickBallTowardsGoal : IStrategy
     {
-        public void Execute(IMatch match, Player  player)
+        public void Execute(ISimulationContext simulationContext, Player  player)
         {
-            if (!MathUtility.IsWithinRadius(player.CurrentPosition, match.Ball.CurrentPosition, player.Stats.Intercept / 100f))
+            if (!MathUtility.IsWithinRadius(player.CurrentPosition, simulationContext.Ball.CurrentPosition, player.Stats.Intercept / 100f))
                 return;
-            match.Ball.SetTargetPosition(match.GoalPosition(1 - player.Team));
+            simulationContext.Ball.SetTargetPosition(simulationContext.GoalPosition(1 - player.Team));
         }
     }
 }

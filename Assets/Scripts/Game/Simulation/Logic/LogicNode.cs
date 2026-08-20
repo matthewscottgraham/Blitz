@@ -1,5 +1,6 @@
 using Game.Simulation.Conditions;
 using Game.Simulation.Entities;
+using Game.Simulation.Match;
 using Game.Simulation.Strategies;
 
 namespace Game.Simulation.Logic
@@ -15,10 +16,10 @@ namespace Game.Simulation.Logic
             _strategy = strategy;
         }
 
-        public bool Evaluate(IMatch match, Player player)
+        public bool Evaluate(ISimulationContext simulationContext, Player player)
         {
-            if (!_condition.IsConditionMet(match, player)) return false;
-            _strategy.Execute(match, player);
+            if (!_condition.IsConditionMet(simulationContext, player)) return false;
+            _strategy.Execute(simulationContext, player);
             return true;
         }
     }
