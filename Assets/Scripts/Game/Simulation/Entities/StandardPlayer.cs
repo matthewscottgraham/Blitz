@@ -3,7 +3,6 @@ using System.Numerics;
 using Game.Simulation.Formations;
 using Game.Simulation.Logic;
 using Game.Simulation.Match;
-using Game.Simulation.Utilities;
 
 namespace Game.Simulation.Entities
 {
@@ -33,7 +32,7 @@ namespace Game.Simulation.Entities
             ApplyMove(deltaTime);
         }
 
-        public override void SetContext(ISimulationContext simulationContext)
+        public void SetContext(ISimulationContext simulationContext)
         {
             _simulationContext = simulationContext;
         }

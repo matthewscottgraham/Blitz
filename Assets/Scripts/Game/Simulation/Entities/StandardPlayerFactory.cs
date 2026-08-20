@@ -39,13 +39,13 @@ namespace Game.Simulation.Entities
         {
             var playerStats = new PlayerStats
             {
-                Accuracy = _random.Next(0, 10),
-                Acceleration = _random.Next(0, 10),
-                TopSpeed = _random.Next(0, 10),
-                Agility = _random.Next(0, 10),
-                Intercept = _random.Next(0, 10),
-                KickPower = _random.Next(0, 10),
-                Mass = _random.Next(0, 10),
+                Accuracy = _random.Next(1, 11),
+                Acceleration = _random.Next(1, 11),
+                TopSpeed = _random.Next(1, 11),
+                Agility = _random.Next(1, 11),
+                Intercept = _random.Next(1, 11),
+                KickPower = _random.Next(1, 11),
+                Mass = _random.Next(1, 11),
             };
             return playerStats;
         }

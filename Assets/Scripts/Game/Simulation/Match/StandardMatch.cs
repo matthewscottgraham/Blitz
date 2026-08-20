@@ -29,14 +29,14 @@ namespace Game.Simulation.Match
             FormationFactory = formationFactory;
             Random = random;
             Ball = ball;
-            Ball.SetContext(this);
             _teams = teams;
 
             for (var i = 0; i < teams.Length; i++)
             {
                 foreach (var simulationEntity in teams[i].Players)
                 {
-                    simulationEntity.SetContext(this);
+                    var player = (ITeamMember)simulationEntity;
+                    player.SetContext(this);
                 }
             }
             

@@ -4,13 +4,11 @@ namespace Game.Simulation.Entities
 {
     public class StandardBall : SimulationEntity
     {
-        private ISimulationContext _simulationContext;
-
-        public override void SetContext(ISimulationContext simulationContext)
+        public StandardBall(PlayerStats stats)
         {
-            _simulationContext = simulationContext;
+            Stats = stats;
         }
-
+        
         public override void Tick(float deltaTime)
         {
             ApplyPhysics(deltaTime);

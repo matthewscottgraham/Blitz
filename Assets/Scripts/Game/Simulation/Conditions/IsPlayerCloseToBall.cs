@@ -9,7 +9,7 @@ namespace Game.Simulation.Conditions
         public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player)
         {
             return MathUtility.IsWithinRadius(player.CurrentPosition, simulationContext.Ball.CurrentPosition,
-                player.Stats.Intercept / 100f);
+                player.Stats.Intercept / 10f);
         }
     }
 }

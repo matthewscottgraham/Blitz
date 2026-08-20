@@ -1,5 +1,4 @@
 using System.Numerics;
-using Game.Simulation.Match;
 
 namespace Game.Simulation.Entities
 {
@@ -9,8 +8,6 @@ namespace Game.Simulation.Entities
         public Vector3 CurrentVelocity { get; protected set; }
         
         public PlayerStats Stats { get; protected set; }
-
-        public abstract void SetContext(ISimulationContext simulationContext);
         
         public abstract void Tick(float deltaTime);
 

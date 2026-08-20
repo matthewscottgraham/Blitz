@@ -10,7 +10,9 @@ namespace Game.Simulation.Strategies
         
         public void Execute(ISimulationContext context, StandardPlayer player)
         {
-            var direction = MathUtility.RandomPointInSphere(player.CurrentPosition, AvoidRadius, context.Random);
+            var direction = 
+                MathUtility.RandomPointInSphere(player.CurrentPosition, AvoidRadius, context.Random)
+                            - player.CurrentPosition;
             player.ApplyForce(direction, player.Stats.Agility);
         }
     }

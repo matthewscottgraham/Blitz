@@ -5,5 +5,6 @@ namespace Game.Simulation.Match
         int Team { get; }
         PlayerRole Role { get; }
         public abstract void AssignTeam(int team);
+        public abstract void SetContext(ISimulationContext simulationContext);
     }
 }
