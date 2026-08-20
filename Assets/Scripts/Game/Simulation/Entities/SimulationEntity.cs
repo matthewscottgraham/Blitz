@@ -11,7 +11,8 @@ namespace Game.Simulation.Entities
         public Vector3 TargetPosition { get; protected set; }
         public Vector3 StartPosition { get; protected set; } = Vector3.Zero;
 
-        public abstract void SetMatch(ISimulationContext simulationContext, int team = -1);
+        public abstract void SetContext(ISimulationContext simulationContext);
+        public abstract void AssignTeam(int team = -1);
         
         public abstract void Tick(float deltaTime);
 

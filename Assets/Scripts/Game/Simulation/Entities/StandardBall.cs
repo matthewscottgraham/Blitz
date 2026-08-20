@@ -9,7 +9,7 @@ namespace Game.Simulation.Entities
         private const int TopSpeed = 5;
         private ISimulationContext _simulationContext;
 
-        public override void SetMatch(ISimulationContext simulationContext, int team = -1)
+        public override void SetContext(ISimulationContext simulationContext, int team = -1)
         {
             _simulationContext = simulationContext;
         }

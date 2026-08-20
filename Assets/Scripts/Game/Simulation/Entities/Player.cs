@@ -35,9 +35,13 @@ namespace Game.Simulation.Entities
             MoveTowardsTarget(deltaTime);
         }
 
-        public override void SetMatch(ISimulationContext simulationContext, int team = -1)
+        public override void SetContext(ISimulationContext simulationContext)
         {
             _simulationContext = simulationContext;
+        }
+        
+        public override void AssignTeam(int team = -1)
+        {
             Team = team;
         }
 

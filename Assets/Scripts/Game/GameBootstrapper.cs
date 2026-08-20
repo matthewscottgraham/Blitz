@@ -11,9 +11,10 @@ namespace Game
 {
     public class GameBootstrapper : MonoBehaviour
     {
-        private ISimulationContext _model;
+        private ISimulationContext _context;
         private IMatchController _controller;
         private SimulationView _view;
+        private HUDController _hudController;
         
         private void Start()
         {
@@ -28,19 +29,23 @@ namespace Game
             ILogicFactory logicFactory = new StandardLogicFactory(strategyFactory, conditionFactory);
             IPlayerFactory playerFactory = new StandardPlayerFactory(logicFactory, random);
             IBallFactory ballFactory = new StandardBallFactory();
+            IMatchFactory matchFactory = new StandardMatchFactory();
             
-            _model = new StandardMatch(
+            var match = matchFactory.CreateMatch(
                 ballFactory.GetNewBall(), 
                 new [] {playerFactory.GetNewTeam(), playerFactory.GetNewTeam()},
                 random
                 );
-            _controller = (IMatchController)_model;
-            _view = gameObject.AddChild<SimulationView>();
-            _view.Initialise(_model);
-            _controller.StartMatch();
+            _context = match.context;
+            _controller = match.controller;
             
-            var hudController = FindAnyObjectByType<HUDController>();
-            hudController.SetMatch(_model);
+            _view = gameObject.AddChild<SimulationView>();
+            _view.Initialise(_context);
+
+            _hudController = gameObject.AddChild<HUDController>();
+            _hudController.Initialize(_context);
+            
+            _controller.StartMatch();
         }
 
         private void Update()
@@ -51,7 +56,7 @@ namespace Game
         private void Quit()
         {
             _controller.Dispose();
-            _model = null;
+            _context = null;
             Application.Quit();
         }
     }

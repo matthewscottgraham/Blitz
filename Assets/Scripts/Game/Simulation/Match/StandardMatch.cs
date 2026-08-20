@@ -27,14 +27,15 @@ namespace Game.Simulation.Match
         {
             Random = random;
             Ball = ball;
-            Ball.SetMatch(this);
+            Ball.SetContext(this);
             _teams = teams;
 
             for (var i = 0; i < teams.Length; i++)
             {
                 foreach (var simulationEntity in teams[i].Players)
                 {
-                    simulationEntity.SetMatch(this, i);
+                    simulationEntity.SetContext(this);
+                    simulationEntity.AssignTeam(i);
                 }
             }
             

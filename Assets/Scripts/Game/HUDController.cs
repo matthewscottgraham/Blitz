@@ -11,14 +11,18 @@ namespace Game
         private ISimulationContext _model;
         private Label[] _scoreLabels;
 
-        public void SetMatch(ISimulationContext simulationContext)
+        public void Initialize(ISimulationContext simulationContext)
         {
+            CreateHUD();
             _model = simulationContext;
         }
 
-        private void Start()
+        private void CreateHUD()
         {
-            var uiDocument = GetComponent<UIDocument>();
+            var uiDocument = gameObject.AddComponent<UIDocument>();
+            uiDocument.panelSettings = Resources.Load<PanelSettings>("UI/PanelSettings");
+            uiDocument.visualTreeAsset = Resources.Load<VisualTreeAsset>("UI/HUD");
+            
             var rootElement = uiDocument.rootVisualElement;
             rootElement.styleSheets.Add(Resources.Load<StyleSheet>("Styles/HUD"));
                 
