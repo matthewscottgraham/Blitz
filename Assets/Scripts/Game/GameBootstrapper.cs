@@ -20,7 +20,7 @@ namespace Game
         {
             IPlayerFactory playerFactory = new StandardPlayerFactory();
 
-            _model = new Match(new [] {playerFactory.GetNewTeam(), playerFactory.GetNewTeam()});
+            _model = new StandardMatch(new [] {playerFactory.GetNewTeam(), playerFactory.GetNewTeam()});
             _view = gameObject.AddChild<SimulationView>();
             _view.Initialise(_model);
             _model.StartMatch();

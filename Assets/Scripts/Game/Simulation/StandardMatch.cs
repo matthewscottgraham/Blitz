@@ -1,10 +1,11 @@
 using System;
 using System.Numerics;
 using Game.Simulation.Entities;
+using Shared;
 
 namespace Game.Simulation
 {
-    public class Match : IMatch
+    public class StandardMatch : IMatch
     {
         private bool _isPlaying = false;
         private Team[] _teams;
@@ -22,7 +23,7 @@ namespace Game.Simulation
 
         public Team GetTeam(int teamIndex) => _teams[teamIndex];
         
-        public Match(Team[] teams)
+        public StandardMatch(Team[] teams)
         {
             Random = new Random();
             Ball = new Ball();
@@ -66,6 +67,8 @@ namespace Game.Simulation
                     player.Tick(deltaTime);
                 }
             }
+
+            CheckForGoal();
         }
 
         public void AddPoint(int teamIndex)
@@ -91,6 +94,20 @@ namespace Game.Simulation
         public void EndMatch()
         {
             
+        }
+        
+        private void CheckForGoal()
+        {
+            if (MathUtility.IsWithinRadius(Ball.CurrentPosition, GoalPosition(0), GoalRadius))
+            {
+                AddPoint(1);
+                Ball.ResetPosition();
+            }
+            else if (MathUtility.IsWithinRadius(Ball.CurrentPosition, GoalPosition(1), GoalRadius))
+            {
+                AddPoint(0);
+                Ball.ResetPosition();
+            }
         }
     }
 }

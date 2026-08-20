@@ -19,7 +19,7 @@ namespace Game.Simulation.Entities
             TargetPosition = targetPosition;
         }
         
-        protected void ResetPosition()
+        public void ResetPosition()
         {
             SetTargetPosition(StartPosition);
             CurrentPosition = StartPosition;

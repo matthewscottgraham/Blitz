@@ -9,7 +9,7 @@ namespace Game.Simulation.Strategies
         {
             if (!MathUtility.IsWithinRadius(player.CurrentPosition, match.Ball.CurrentPosition, player.Stats.Intercept / 100f))
                 return;
-            match.Ball.SetTargetPosition(match.GoalPosition(player.Team));
+            match.Ball.SetTargetPosition(match.GoalPosition(1 - player.Team));
         }
     }
 }
