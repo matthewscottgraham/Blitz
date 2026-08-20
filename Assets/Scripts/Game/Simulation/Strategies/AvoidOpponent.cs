@@ -8,9 +8,10 @@ namespace Game.Simulation.Strategies
     {
         private const float AvoidRadius = 1f;
         
-        public void Execute(ISimulationContext simulationContext, Player player)
+        public void Execute(ISimulationContext context, StandardPlayer player)
         {
-            player.SetTargetPosition(MathUtility.RandomPointInSphere(player.CurrentPosition, AvoidRadius, simulationContext.Random));
+            var direction = MathUtility.RandomPointInSphere(player.CurrentPosition, AvoidRadius, context.Random);
+            player.ApplyForce(direction, player.Stats.Agility);
         }
     }
 }

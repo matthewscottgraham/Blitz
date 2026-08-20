@@ -5,7 +5,7 @@ namespace Game.Simulation.Strategies
 {
     public class PassBall : IStrategy
     {
-        public void Execute(ISimulationContext simulationContext, Player  player)
+        public void Execute(ISimulationContext simulationContext, StandardPlayer  player)
         {
             
         }

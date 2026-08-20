@@ -16,7 +16,7 @@ namespace Game.Simulation.Logic
             _strategy = strategy;
         }
 
-        public bool Evaluate(ISimulationContext simulationContext, Player player)
+        public bool Evaluate(ISimulationContext simulationContext, StandardPlayer player)
         {
             if (!_condition.IsConditionMet(simulationContext, player)) return false;
             _strategy.Execute(simulationContext, player);

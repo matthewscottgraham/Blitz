@@ -7,7 +7,7 @@ namespace Game.Simulation.Conditions
     public class IsOpponentCloseToPlayer : ICondition
     {
         private const float Radius = 0.5f;
-        public bool IsConditionMet(ISimulationContext simulationContext, Player player)
+        public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player)
         {
             var otherTeam = simulationContext.GetTeam((player.Team + 1) % 2);
             foreach (var opponent in otherTeam.Players)

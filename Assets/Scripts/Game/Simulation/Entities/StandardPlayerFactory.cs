@@ -30,7 +30,7 @@ namespace Game.Simulation.Entities
 
         public SimulationEntity GetNewPlayer(PlayerRole role, int teamIndex)
         {
-            var player = new Player(GetRandomPlayerStats(), role, teamIndex);
+            var player = new StandardPlayer(GetRandomPlayerStats(), role, teamIndex);
             player.SetLogic(_logicFactory.CreateLogicNodes(role));
             return player;
         }
@@ -39,8 +39,13 @@ namespace Game.Simulation.Entities
         {
             var playerStats = new PlayerStats
             {
-                Intercept = _random.Next(1, 11),
-                TopSpeed = _random.Next(1, 3)
+                Accuracy = _random.Next(0, 10),
+                Acceleration = _random.Next(0, 10),
+                TopSpeed = _random.Next(0, 10),
+                Agility = _random.Next(0, 10),
+                Intercept = _random.Next(0, 10),
+                KickPower = _random.Next(0, 10),
+                Mass = _random.Next(0, 10),
             };
             return playerStats;
         }

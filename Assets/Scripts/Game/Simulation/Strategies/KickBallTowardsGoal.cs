@@ -6,11 +6,10 @@ namespace Game.Simulation.Strategies
 {
     public class KickBallTowardsGoal : IStrategy
     {
-        public void Execute(ISimulationContext simulationContext, Player  player)
+        public void Execute(ISimulationContext context, StandardPlayer  player)
         {
-            if (!MathUtility.IsWithinRadius(player.CurrentPosition, simulationContext.Ball.CurrentPosition, player.Stats.Intercept / 100f))
-                return;
-            simulationContext.Ball.SetTargetPosition(simulationContext.GoalPosition(1 - player.Team));
+            var direction = context.GoalPosition(player.Team) - context.Ball.CurrentPosition;
+            context.Ball.ApplyForce(direction, player.Stats.KickPower);
         }
     }
 }

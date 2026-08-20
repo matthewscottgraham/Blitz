@@ -5,26 +5,31 @@ namespace Game.Simulation.Entities
 {
     public abstract class SimulationEntity : IResettable
     {
-        protected float MoveProgress = 0;
-        
         public Vector3 CurrentPosition { get; protected set; }
-        public Vector3 TargetPosition { get; protected set; }
-        public Vector3 StartPosition { get; protected set; } = Vector3.Zero;
+        public Vector3 CurrentVelocity { get; protected set; }
+        
+        public PlayerStats Stats { get; protected set; }
 
         public abstract void SetContext(ISimulationContext simulationContext);
         
         public abstract void Tick(float deltaTime);
 
-        public void SetTargetPosition(Vector3 targetPosition)
+        public void ApplyForce(Vector3 direction, float magnitude)
         {
-            TargetPosition = targetPosition;
+            var acceleration = Vector3.Normalize(direction) * (magnitude / Stats.Mass);
+            CurrentVelocity += acceleration;
         }
         
         public virtual void Reset()
         {
-            SetTargetPosition(StartPosition);
-            CurrentPosition = StartPosition;
-            MoveProgress = 0;
+            CurrentPosition = Vector3.Zero;
+            CurrentVelocity = Vector3.Zero;
+        }
+
+        protected void ApplyPhysics(float deltaTime, float drag = 0.95f)
+        {
+            CurrentPosition += CurrentVelocity * deltaTime;
+            CurrentVelocity *= drag;
         }
     }
 }
