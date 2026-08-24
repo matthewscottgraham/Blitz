@@ -5,7 +5,7 @@ namespace Game.Simulation.Strategies
 {
     public class Dribble : IStrategy
     {
-        public void Execute(ISimulationContext simulationContext, StandardPlayer player)
+        public void Execute(ISimulationContext context, StandardPlayer player)
         {
             
         }

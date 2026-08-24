@@ -25,16 +25,61 @@ namespace Game.Simulation.Logic
             // TODO create different logic node profiles per PlayerRole
             return playerRole switch
             {
-                PlayerRole.Center => CreateStandardNodes(),
-                PlayerRole.Forward => CreateStandardNodes(),
-                PlayerRole.Defense => CreateStandardNodes(),
+                PlayerRole.Center => CreateCenterPositionNodes(),
+                PlayerRole.Forward => CreateForwardPositionNodes(),
+                PlayerRole.Defense => CreateDefenseNodes(),
                 PlayerRole.Keeper => CreateKeeperNodes(),
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRole), playerRole, null)
             };
-            
         }
 
-        private LogicNode[] CreateStandardNodes()
+        private LogicNode[] CreateCenterPositionNodes()
+        {
+            return new LogicNode[]
+            {
+                new (
+                    _conditionFactory.CreateCondition<IsOpponentCloseToPlayer>(), 
+                    _strategyFactory.CreateStrategy<AvoidOpponent>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<IsPlayerCloseToBall>(), 
+                    _strategyFactory.CreateStrategy<KickBallTowardsGoal>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<IsNearestTeammateToBall>(), 
+                    _strategyFactory.CreateStrategy<ChaseBall>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<AlwaysTrue>(), 
+                    _strategyFactory.CreateStrategy<StandGround>()
+                )
+            };
+        }
+
+        private LogicNode[] CreateForwardPositionNodes()
+        {
+            return new LogicNode[]
+            {
+                new(
+                    _conditionFactory.CreateCondition<IsNearestTeammateToBall>(),
+                    _strategyFactory.CreateStrategy<ChaseBall>()
+                ),
+                new(
+                    _conditionFactory.CreateCondition<CanPlayerKickGoal>(),
+                    _strategyFactory.CreateStrategy<KickBallTowardsGoal>()
+                ),
+                new(
+                    _conditionFactory.CreateCondition<IsPlayerCloseToBall>(),
+                    _strategyFactory.CreateStrategy<PassBall>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<AlwaysTrue>(), 
+                    _strategyFactory.CreateStrategy<StandGround>()
+                )
+            };
+        }
+
+        private LogicNode[] CreateDefenseNodes()
         {
             return new LogicNode[]
             {
@@ -43,16 +88,16 @@ namespace Game.Simulation.Logic
                     _strategyFactory.CreateStrategy<AvoidOpponent>()
                     ),
                 new (
-                    _conditionFactory.CreateCondition<IsPlayerAbleToReachBall>(), 
+                    _conditionFactory.CreateCondition<IsPlayerCloseToBall>(), 
+                    _strategyFactory.CreateStrategy<PassBall>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<IsNearestTeammateToBall>(), 
                     _strategyFactory.CreateStrategy<ChaseBall>()
                 ),
                 new (
-                    _conditionFactory.CreateCondition<IsPlayerCloseToBall>(), 
-                    _strategyFactory.CreateStrategy<KickBallTowardsGoal>()
-                ),
-                new (
                     _conditionFactory.CreateCondition<AlwaysTrue>(), 
-                    _strategyFactory.CreateStrategy<StandGround>()
+                    _strategyFactory.CreateStrategy<MarkPlayer>()
                 )
             };
         }

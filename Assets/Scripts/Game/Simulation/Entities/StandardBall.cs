@@ -1,5 +1,3 @@
-using Game.Simulation.Match;
-
 namespace Game.Simulation.Entities
 {
     public class StandardBall : SimulationEntity
