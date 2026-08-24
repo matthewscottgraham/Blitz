@@ -9,6 +9,7 @@ namespace Game.Simulation.Match
     public class StandardMatch : ISimulationContext, IMatchController
     {
         private bool _isPlaying = false;
+        private float _resetCooldown = 0;
         private Team[] _teams;
         private readonly Vector3[] _goalPositions;
         
@@ -21,6 +22,17 @@ namespace Game.Simulation.Match
         public float GoalRadius { get; } = 1f;
         
         public Vector3 GoalPosition(int teamIndex) => _goalPositions[teamIndex];
+        
+        public SimulationEntity GetPlayerByRole(int teamIndex, PlayerRole role)
+        {
+            foreach (var player in _teams[teamIndex].Players)
+            {
+                var teamMember = player as ITeamMember;
+                if (teamMember.Role == role) return player;
+            }
+            return null;
+        }
+
         public SimulationEntity Ball { get; }
         public Team GetTeam(int teamIndex) => _teams[teamIndex];
         
@@ -60,6 +72,18 @@ namespace Game.Simulation.Match
         public void Tick(float deltaTime)
         {
             if (!_isPlaying) return;
+            if (_resetCooldown > 0)
+            {
+                _resetCooldown -= deltaTime;
+                return;
+            }
+
+            if (!MathUtility.IsWithinRadius(Ball.CurrentPosition, Vector3.Zero, FieldRadius))
+            {
+                ResetPlay();
+                return;
+            }
+            
             Ball.Tick(deltaTime);
             foreach (var team in _teams)
             {
@@ -94,6 +118,7 @@ namespace Game.Simulation.Match
 
         public void ResetPlay()
         {
+            _resetCooldown = 0.5f;
             Ball.Reset();
             foreach (var team in _teams)
             {

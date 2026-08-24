@@ -10,9 +10,11 @@ namespace Game.Simulation.Entities
     {
         private LogicNode[] _logicNodes = Array.Empty<LogicNode>();
         private ISimulationContext _simulationContext;
-        
+
         public int Team { get; private set; }
+        public int OtherTeam {get; private set;}
         public PlayerRole Role { get; private set; }
+        public PlayerRole MarkedPlayerRole { get; private set; }
 
         public StandardPlayer(PlayerStats playerStats, PlayerRole role, int teamIndex)
         {
@@ -55,8 +57,8 @@ namespace Game.Simulation.Entities
 
         private void ApplyMove(float deltaTime)
         {
-            if (CurrentVelocity.Length() > Stats.TopSpeed)
-                CurrentVelocity = Vector3.Normalize(CurrentVelocity) * Stats.TopSpeed;
+            if (CurrentVelocity.Length() > Stats.Speed)
+                CurrentVelocity = Vector3.Normalize(CurrentVelocity) * Stats.Speed;
             ApplyPhysics(deltaTime);
         }
     }

@@ -29,8 +29,10 @@ namespace Game.Simulation.Formations
             return role switch
             {
                 PlayerRole.Center => new Vector3(1, 0, 1),
-                PlayerRole.Forward => new Vector3(3, 0, 2),
-                PlayerRole.Defense => new Vector3(2, 0, 3),
+                PlayerRole.ForwardLeft => new Vector3(-3, 0, 2),
+                PlayerRole.ForwardRight => new Vector3(3, 0, 2),
+                PlayerRole.DefenseLeft => new Vector3(-2, 0, 3),
+                PlayerRole.DefenseRight => new Vector3(2, 0, 3),
                 PlayerRole.Keeper => new Vector3(0, 0, 4.5f),
                 _ => throw new ArgumentOutOfRangeException(nameof(role), role, null)
             };
@@ -41,8 +43,10 @@ namespace Game.Simulation.Formations
             return role switch
             {
                 PlayerRole.Center => new Vector3(0, 0, -1),
-                PlayerRole.Forward => new Vector3(-1, 0, -2),
-                PlayerRole.Defense => new Vector3(-2, 0, -3),
+                PlayerRole.ForwardLeft => new Vector3(-1, 0, -2),
+                PlayerRole.ForwardRight => new Vector3(1, 0, -2),
+                PlayerRole.DefenseLeft => new Vector3(-2, 0, -3),
+                PlayerRole.DefenseRight => new Vector3(2, 0, -3),
                 PlayerRole.Keeper => new Vector3(0, 0, -4.5f),
                 _ => throw new ArgumentOutOfRangeException(nameof(role), role, null)
             };

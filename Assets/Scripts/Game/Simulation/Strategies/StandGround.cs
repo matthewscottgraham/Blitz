@@ -11,7 +11,7 @@ namespace Game.Simulation.Strategies
             var direction = 
                 context.FormationFactory.GetFormationPosition(FormationType.Standard, player.Team, player.Role) 
                 - player.CurrentPosition;
-            player.ApplyForce(direction, player.Stats.TopSpeed * 10f);
+            player.ApplyForce(direction, player.Stats.Speed * 10f);
         }
     }
 }

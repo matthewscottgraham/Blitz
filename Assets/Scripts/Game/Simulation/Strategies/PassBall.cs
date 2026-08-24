@@ -1,6 +1,7 @@
 using System.Numerics;
 using Game.Simulation.Entities;
 using Game.Simulation.Match;
+using Game.Simulation.Utilities;
 
 namespace Game.Simulation.Strategies
 {
@@ -22,6 +23,7 @@ namespace Game.Simulation.Strategies
 
             if (closestPlayer == null) return;
             var direction = closestPlayer.CurrentPosition - player.CurrentPosition;
+            direction.ApplyStatNoise(context.Random, player.Stats.Accuracy);
             context.Ball.ApplyForce(direction, player.Stats.KickPower);
         }
     }

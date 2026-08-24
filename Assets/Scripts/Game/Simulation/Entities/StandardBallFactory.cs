@@ -13,7 +13,7 @@ namespace Game.Simulation.Entities
             {
                 Accuracy = 10,
                 Acceleration = 10,
-                TopSpeed = 10,
+                Speed = 10,
                 Agility = 0,
                 Intercept = 0,
                 KickPower = 0,

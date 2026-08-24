@@ -4,7 +4,7 @@ namespace Game.Simulation
     {
         public int Accuracy;
         public int Acceleration;
-        public int TopSpeed;
+        public int Speed;
         public int Agility;
         public int Intercept;
         public int KickPower;

@@ -7,7 +7,8 @@ namespace Game.Simulation.Strategies
     {
         public void Execute(ISimulationContext context, StandardPlayer  player)
         {
-            
+            var direction = context.Ball.CurrentPosition - context.GoalPosition(player.Team);
+            context.Ball.ApplyForce(direction, player.Stats.KickPower);
         }
     }
 }

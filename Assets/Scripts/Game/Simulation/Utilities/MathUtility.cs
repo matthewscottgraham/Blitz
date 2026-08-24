@@ -5,11 +5,18 @@ namespace Game.Simulation.Utilities
 {
     public static class MathUtility
     {
-        
-
         public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
         {
             return a + (b - a) * t;
+        }
+
+        public static Vector3 ApplyStatNoise(this Vector3 position, Random random, float accuracy)
+        {
+            return new Vector3(
+                (float)(random.NextDouble() - 0.5f) * 2,
+                (float)(random.NextDouble() - 0.5f) * 2,
+                (float)(random.NextDouble() - 0.5f) * 2
+            ) * (1f - accuracy / 100f);
         }
         
         public static Vector3 RandomPointInSphere(Vector3 center, float radius, Random random)

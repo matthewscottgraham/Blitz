@@ -26,8 +26,10 @@ namespace Game.Simulation.Logic
             return playerRole switch
             {
                 PlayerRole.Center => CreateCenterPositionNodes(),
-                PlayerRole.Forward => CreateForwardPositionNodes(),
-                PlayerRole.Defense => CreateDefenseNodes(),
+                PlayerRole.ForwardLeft => CreateForwardPositionNodes(),
+                PlayerRole.ForwardRight => CreateForwardPositionNodes(),
+                PlayerRole.DefenseLeft => CreateDefenseNodes(),
+                PlayerRole.DefenseRight => CreateDefenseNodes(),
                 PlayerRole.Keeper => CreateKeeperNodes(),
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRole), playerRole, null)
             };
@@ -61,16 +63,16 @@ namespace Game.Simulation.Logic
             return new LogicNode[]
             {
                 new(
-                    _conditionFactory.CreateCondition<IsNearestTeammateToBall>(),
-                    _strategyFactory.CreateStrategy<ChaseBall>()
-                ),
-                new(
                     _conditionFactory.CreateCondition<CanPlayerKickGoal>(),
                     _strategyFactory.CreateStrategy<KickBallTowardsGoal>()
                 ),
                 new(
+                    _conditionFactory.CreateCondition<IsNearestTeammateToBall>(),
+                    _strategyFactory.CreateStrategy<Dribble>()
+                    ),
+                new(
                     _conditionFactory.CreateCondition<IsPlayerCloseToBall>(),
-                    _strategyFactory.CreateStrategy<PassBall>()
+                    _strategyFactory.CreateStrategy<ChaseBall>()
                 ),
                 new (
                     _conditionFactory.CreateCondition<AlwaysTrue>(), 
@@ -107,12 +109,12 @@ namespace Game.Simulation.Logic
             return new LogicNode[]
             {
                 new (
-                    _conditionFactory.CreateCondition<IsPlayerAbleToReachBall>(), 
-                    _strategyFactory.CreateStrategy<ChaseBall>()
-                ),
-                new (
                     _conditionFactory.CreateCondition<IsPlayerCloseToBall>(), 
                     _strategyFactory.CreateStrategy<InterceptBall>()
+                ),
+                new (
+                    _conditionFactory.CreateCondition<IsPlayerAbleToReachBall>(), 
+                    _strategyFactory.CreateStrategy<ChaseBall>()
                 ),
                 new (
                     _conditionFactory.CreateCondition<AlwaysTrue>(), 

@@ -13,6 +13,7 @@ namespace Game.Simulation.Entities
 
         public void ApplyForce(Vector3 direction, float magnitude)
         {
+            if (direction.LengthSquared() < 0.0001f) return;
             var acceleration = Vector3.Normalize(direction) * (magnitude / Stats.Mass);
             CurrentVelocity += acceleration;
         }

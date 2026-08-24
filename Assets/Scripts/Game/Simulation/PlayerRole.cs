@@ -2,9 +2,11 @@ namespace Game.Simulation
 {
     public enum PlayerRole
     {
-        Forward,
+        ForwardLeft,
+        ForwardRight,
         Center,
-        Defense,
+        DefenseLeft,
+        DefenseRight,
         Keeper
     }
 }

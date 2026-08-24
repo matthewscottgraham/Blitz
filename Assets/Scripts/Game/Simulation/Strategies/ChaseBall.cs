@@ -8,7 +8,7 @@ namespace Game.Simulation.Strategies
         public void Execute(ISimulationContext context, StandardPlayer player)
         {
             var direction = context.Ball.CurrentPosition - player.CurrentPosition;
-            player.ApplyForce(direction, player.Stats.TopSpeed * 10f);
+            player.ApplyForce(direction, player.Stats.Speed * 10f);
         }
     }
 }

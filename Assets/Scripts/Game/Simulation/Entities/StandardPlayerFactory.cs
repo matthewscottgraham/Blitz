@@ -18,11 +18,11 @@ namespace Game.Simulation.Entities
         {
             var players = new []
             {
-                GetNewPlayer(PlayerRole.Forward, teamIndex),
-                GetNewPlayer(PlayerRole.Forward, teamIndex),
+                GetNewPlayer(PlayerRole.ForwardLeft, teamIndex),
+                GetNewPlayer(PlayerRole.ForwardRight, teamIndex),
                 GetNewPlayer(PlayerRole.Center, teamIndex),
-                GetNewPlayer(PlayerRole.Defense, teamIndex),
-                GetNewPlayer(PlayerRole.Defense, teamIndex),
+                GetNewPlayer(PlayerRole.DefenseLeft, teamIndex),
+                GetNewPlayer(PlayerRole.DefenseRight, teamIndex),
                 GetNewPlayer(PlayerRole.Keeper, teamIndex)
             };
             return new Team(players);
@@ -41,7 +41,7 @@ namespace Game.Simulation.Entities
             {
                 Accuracy = _random.Next(1, 11),
                 Acceleration = _random.Next(1, 11),
-                TopSpeed = _random.Next(1, 11),
+                Speed = _random.Next(1, 11),
                 Agility = _random.Next(1, 11),
                 Intercept = _random.Next(1, 11),
                 KickPower = _random.Next(1, 11),
