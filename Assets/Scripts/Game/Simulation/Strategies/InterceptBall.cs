@@ -5,10 +5,10 @@ namespace Game.Simulation.Strategies
 {
     public class InterceptBall : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardPlayer  player)
+        public void Execute(ISimulationContext context, StandardTeamMember  teamMember)
         {
-            var direction = context.Ball.CurrentPosition - context.GoalPosition(player.Team);
-            context.Ball.ApplyForce(direction, player.Stats.KickPower);
+            var direction = context.Ball.CurrentPosition - context.GoalPosition(teamMember.Team);
+            context.Ball.ApplyForce(direction, teamMember.Stats.KickPower);
         }
     }
 }

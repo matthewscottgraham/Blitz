@@ -5,13 +5,14 @@ namespace Game.Simulation.Strategies
 {
     public class MarkPlayer : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardPlayer player)
+        public void Execute(ISimulationContext context, StandardTeamMember teamMember)
         {
-            var markedPlayer = context.GetPlayerByRole(player.OtherTeam, player.MarkedPlayerRole);
+            var markedPlayer = context.GetPlayerByRole(teamMember.OpposingTeam, teamMember.MarkedPlayerRole);
             if (markedPlayer == null) return;
-            
-            var direction = markedPlayer.CurrentPosition - player.CurrentPosition;
-            player.ApplyForce(direction, player.Stats.Speed * 10f);
+
+            var markedEntity = (ISimulationEntity)markedPlayer;
+            var direction = markedEntity.CurrentPosition - teamMember.CurrentPosition;
+            teamMember.ApplyForce(direction, teamMember.Stats.Speed * 10f);
         }
     }
 }

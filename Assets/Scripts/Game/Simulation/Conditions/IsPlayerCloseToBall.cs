@@ -6,10 +6,10 @@ namespace Game.Simulation.Conditions
 {
     public class IsPlayerCloseToBall : ICondition
     {
-        public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player)
+        public bool IsConditionMet(ISimulationContext simulationContext, StandardTeamMember teamMember)
         {
-            return MathUtility.IsWithinRadius(player.CurrentPosition, simulationContext.Ball.CurrentPosition,
-                player.Stats.Intercept / 10f);
+            return MathUtility.IsWithinRadius(teamMember.CurrentPosition, simulationContext.Ball.CurrentPosition,
+                teamMember.Stats.Intercept / 10f);
         }
     }
 }

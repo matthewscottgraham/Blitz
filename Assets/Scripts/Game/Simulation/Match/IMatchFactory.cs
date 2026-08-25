@@ -6,6 +6,6 @@ namespace Game.Simulation.Match
 {
     public interface IMatchFactory
     {
-        (ISimulationContext context, IMatchController controller) CreateMatch(IFormationFactory formationFactory, SimulationEntity ball, Team[] teams, Random random);
+        (ISimulationContext context, IMatchController controller) CreateMatch(IFormationFactory formationFactory, ISimulationEntity ball, Team[] teams, Random random);
     }
 }

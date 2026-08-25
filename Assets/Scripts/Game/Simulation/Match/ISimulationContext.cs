@@ -11,10 +11,10 @@ namespace Game.Simulation.Match
         Random Random { get; }
         float FieldRadius { get; }
         float GoalRadius { get; }
-        SimulationEntity Ball { get; }
+        ISimulationEntity Ball { get; }
         public int[]  Points { get; }
         Team GetTeam(int index);
         Vector3 GoalPosition(int teamIndex);
-        SimulationEntity GetPlayerByRole(int teamIndex, PlayerRole role);
+        ITeamMember GetPlayerByRole(int teamIndex, PlayerRole role);
     }
 }

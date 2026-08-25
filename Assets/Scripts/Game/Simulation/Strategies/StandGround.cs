@@ -6,12 +6,12 @@ namespace Game.Simulation.Strategies
 {
     public class StandGround : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardPlayer player)
+        public void Execute(ISimulationContext context, StandardTeamMember teamMember)
         {
             var direction = 
-                context.FormationFactory.GetFormationPosition(FormationType.Standard, player.Team, player.Role) 
-                - player.CurrentPosition;
-            player.ApplyForce(direction, player.Stats.Speed * 10f);
+                context.FormationFactory.GetFormationPosition(FormationType.Standard, teamMember.Team, teamMember.Role) 
+                - teamMember.CurrentPosition;
+            teamMember.ApplyForce(direction, teamMember.Stats.Speed * 10f);
         }
     }
 }

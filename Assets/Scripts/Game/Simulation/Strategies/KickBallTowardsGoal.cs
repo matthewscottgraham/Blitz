@@ -7,12 +7,12 @@ namespace Game.Simulation.Strategies
 {
     public class KickBallTowardsGoal : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardPlayer  player)
+        public void Execute(ISimulationContext context, StandardTeamMember  teamMember)
         {
-            var targetGoalPosition = context.GoalPosition((player.Team + 1) % 2);
-            targetGoalPosition.ApplyStatNoise(context.Random, player.Stats.Accuracy);
-            var direction = targetGoalPosition - context.Ball.CurrentPosition;
-            context.Ball.ApplyForce(direction, player.Stats.KickPower);
+            var targetGoalPosition = context.GoalPosition((teamMember.Team + 1) % 2);
+            var adjustedGoalPosition = targetGoalPosition.ApplyStatNoise(context.Random, teamMember.Stats.Accuracy);
+            var direction = adjustedGoalPosition - context.Ball.CurrentPosition;
+            context.Ball.ApplyForce(direction, teamMember.Stats.KickPower);
         }
     }
 }

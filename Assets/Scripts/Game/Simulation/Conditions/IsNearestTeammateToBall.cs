@@ -6,24 +6,16 @@ namespace Game.Simulation.Conditions
 {
     public class IsNearestTeammateToBall : ICondition
     {
-        public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player)
+        public bool IsConditionMet(ISimulationContext simulationContext, StandardTeamMember teamMember)
         {
-            var teamMates = simulationContext.GetTeam(player.Team);
-            var playerDistance = Vector3.Distance(player.CurrentPosition, simulationContext.Ball.CurrentPosition);
-            foreach (var teamMate in teamMates.Players)
+            var teamMates = simulationContext.GetTeam(teamMember.Team);
+            var playerDistance = Vector3.Distance(teamMember.CurrentPosition, simulationContext.Ball.CurrentPosition);
+            foreach (var teamMate in teamMates.Entities)
             {
                 if (Vector3.Distance(teamMate.CurrentPosition, simulationContext.Ball.CurrentPosition) < playerDistance)
                     return false;
             }
             return true;
-        }
-    }
-    
-    public class CanPlayerKickGoal : ICondition
-    {
-        public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player)
-        {
-            return false;
         }
     }
 }

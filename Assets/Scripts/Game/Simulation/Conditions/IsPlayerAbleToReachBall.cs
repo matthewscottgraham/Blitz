@@ -7,9 +7,9 @@ namespace Game.Simulation.Conditions
     public class IsPlayerAbleToReachBall : ICondition
     {
         private const float Radius = 1f;
-        public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player)
+        public bool IsConditionMet(ISimulationContext simulationContext, StandardTeamMember teamMember)
         {
-            return MathUtility.IsWithinRadius(player.CurrentPosition, simulationContext.Ball.CurrentPosition,
+            return MathUtility.IsWithinRadius(teamMember.CurrentPosition, simulationContext.Ball.CurrentPosition,
                 Radius);
         }
     }

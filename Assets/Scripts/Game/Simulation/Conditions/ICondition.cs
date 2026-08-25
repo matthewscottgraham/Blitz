@@ -5,6 +5,6 @@ namespace Game.Simulation.Conditions
 {
     public interface ICondition
     {
-        public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player);
+        public bool IsConditionMet(ISimulationContext simulationContext, StandardTeamMember teamMember);
     }
 }

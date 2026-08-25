@@ -1,21 +1,29 @@
 using System;
 using System.Collections.Generic;
 using Game.Simulation.Entities;
+using Game.Simulation.Match;
 
 namespace Game.Simulation
 {
     public class Team : IDisposable
     {
-        public SimulationEntity[] Players;
+        public ITeamMember[] TeamMembers;
+        public ISimulationEntity[] Entities;
 
-        public Team(SimulationEntity[] players)
+        public Team(ITeamMember[] teamMembers)
         {
-            Players = players;
+            TeamMembers = teamMembers;
+            Entities = new ISimulationEntity[TeamMembers.Length];
+            for (var i = 0; i < TeamMembers.Length; i++)
+            {
+                Entities[i] = (ISimulationEntity) TeamMembers[i];
+            }
         }
 
         public void Dispose()
         {
-            Players = null;
+            TeamMembers = null;
+            Entities = null;
         }
     }
 }

@@ -2,23 +2,9 @@ namespace Game.Simulation.Entities
 {
     public class StandardBallFactory : IBallFactory
     {
-        public SimulationEntity GetNewBall()
+        public ISimulationEntity GetNewBall()
         {
-            return new StandardBall(GetBallStats());
-        }
-
-        private PlayerStats GetBallStats()
-        {
-            return new PlayerStats
-            {
-                Accuracy = 10,
-                Acceleration = 10,
-                Speed = 10,
-                Agility = 0,
-                Intercept = 0,
-                KickPower = 0,
-                Mass = 1,
-            };
+            return new StandardBall();
         }
     }
 }

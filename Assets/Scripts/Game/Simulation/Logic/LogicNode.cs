@@ -16,10 +16,10 @@ namespace Game.Simulation.Logic
             _strategy = strategy;
         }
 
-        public bool Evaluate(ISimulationContext simulationContext, StandardPlayer player)
+        public bool Evaluate(ISimulationContext simulationContext, StandardTeamMember teamMember)
         {
-            if (!_condition.IsConditionMet(simulationContext, player)) return false;
-            _strategy.Execute(simulationContext, player);
+            if (!_condition.IsConditionMet(simulationContext, teamMember)) return false;
+            _strategy.Execute(simulationContext, teamMember);
             return true;
         }
     }

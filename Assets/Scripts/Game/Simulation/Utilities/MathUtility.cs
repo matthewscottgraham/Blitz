@@ -16,7 +16,7 @@ namespace Game.Simulation.Utilities
                 (float)(random.NextDouble() - 0.5f) * 2,
                 (float)(random.NextDouble() - 0.5f) * 2,
                 (float)(random.NextDouble() - 0.5f) * 2
-            ) * (1f - accuracy / 100f);
+            ) * (1f - accuracy / 10f);
         }
         
         public static Vector3 RandomPointInSphere(Vector3 center, float radius, Random random)

@@ -5,7 +5,7 @@ namespace Game.Simulation.Conditions
 {
     public class AlwaysTrue : ICondition
     {
-        public bool IsConditionMet(ISimulationContext simulationContext, StandardPlayer player)
+        public bool IsConditionMet(ISimulationContext simulationContext, StandardTeamMember teamMember)
         {
             return true;
         }

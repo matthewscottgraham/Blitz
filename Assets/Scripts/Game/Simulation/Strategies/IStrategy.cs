@@ -5,6 +5,6 @@ namespace Game.Simulation.Strategies
 {
     public interface IStrategy
     {
-        public void Execute(ISimulationContext context, StandardPlayer  player);
+        public void Execute(ISimulationContext context, StandardTeamMember  teamMember);
     }
 }

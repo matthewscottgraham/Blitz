@@ -7,24 +7,24 @@ namespace Game.Simulation.Strategies
 {
     public class PassBall : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardPlayer  player)
+        public void Execute(ISimulationContext context, StandardTeamMember  teamMember)
         {
-            var teamMates = context.GetTeam(player.Team);
-            SimulationEntity closestPlayer = null;
+            var teamMates = context.GetTeam(teamMember.Team);
+            ISimulationEntity closestPlayer = null;
             var closestDistance = float.MaxValue;
-            foreach (var teamMate in teamMates.Players)
+            foreach (var teamMate in teamMates.Entities)
             {
-                if (teamMate == player) continue;
-                var distance = Vector3.Distance(teamMate.CurrentPosition, context.GoalPosition((player.Team + 1) % 2));
+                if (teamMate == teamMember) continue;
+                var distance = Vector3.Distance(teamMate.CurrentPosition, context.GoalPosition((teamMember.Team + 1) % 2));
                 if (!(distance < closestDistance)) continue;
                 closestPlayer = teamMate;
                 closestDistance = distance;
             }
 
             if (closestPlayer == null) return;
-            var direction = closestPlayer.CurrentPosition - player.CurrentPosition;
-            direction.ApplyStatNoise(context.Random, player.Stats.Accuracy);
-            context.Ball.ApplyForce(direction, player.Stats.KickPower);
+            var direction = closestPlayer.CurrentPosition - teamMember.CurrentPosition;
+            var adjustedDirection = direction.ApplyStatNoise(context.Random, teamMember.Stats.Accuracy);
+            context.Ball.ApplyForce(adjustedDirection, teamMember.Stats.KickPower);
         }
     }
 }

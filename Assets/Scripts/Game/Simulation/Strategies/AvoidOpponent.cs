@@ -8,12 +8,12 @@ namespace Game.Simulation.Strategies
     {
         private const float AvoidRadius = 1f;
         
-        public void Execute(ISimulationContext context, StandardPlayer player)
+        public void Execute(ISimulationContext context, StandardTeamMember teamMember)
         {
             var direction = 
-                MathUtility.RandomPointInSphere(player.CurrentPosition, AvoidRadius, context.Random)
-                            - player.CurrentPosition;
-            player.ApplyForce(direction, player.Stats.Agility);
+                MathUtility.RandomPointInSphere(teamMember.CurrentPosition, AvoidRadius, context.Random)
+                            - teamMember.CurrentPosition;
+            teamMember.ApplyForce(direction, teamMember.Stats.Agility);
         }
     }
 }

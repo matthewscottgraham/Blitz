@@ -30,8 +30,8 @@ namespace Game.View
             DrawGoal(_simulationContext.GoalPosition(0).ToUnityVector(), _cyan);
             DrawGoal(_simulationContext.GoalPosition(1).ToUnityVector(), _magenta);
             DrawBall(_simulationContext.Ball.CurrentPosition.ToUnityVector());
-            DrawTeam(_simulationContext.GetTeam(0).Players, _blue);
-            DrawTeam(_simulationContext.GetTeam(1).Players, _red);
+            DrawTeam(_simulationContext.GetTeam(0).Entities, _blue);
+            DrawTeam(_simulationContext.GetTeam(1).Entities, _red);
         }
 
         private void DrawGoal(Vector3 goalPosition, Color color)
@@ -60,7 +60,7 @@ namespace Game.View
             Gizmos.DrawSphere(ballPosition, EntityRadius);
         }
 
-        private void DrawTeam(SimulationEntity[] players, Color color)
+        private void DrawTeam(ISimulationEntity[] players, Color color)
         {
             Gizmos.color = color;
             foreach (var player in players)

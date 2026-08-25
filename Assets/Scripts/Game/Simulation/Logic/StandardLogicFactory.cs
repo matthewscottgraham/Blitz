@@ -22,7 +22,6 @@ namespace Game.Simulation.Logic
 
         public LogicNode[] CreateLogicNodes(PlayerRole playerRole)
         {
-            // TODO create different logic node profiles per PlayerRole
             return playerRole switch
             {
                 PlayerRole.Center => CreateCenterPositionNodes(),

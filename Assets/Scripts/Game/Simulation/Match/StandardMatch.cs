@@ -12,31 +12,31 @@ namespace Game.Simulation.Match
         private float _resetCooldown = 0;
         private Team[] _teams;
         private readonly Vector3[] _goalPositions;
+        private int[] _points;
         
         public IFormationFactory FormationFactory { get; }
 
-        public int[] Points { get; }
-        public float SimulationSpeed { get; } = 0.01f;
+        public int[] Points => _points;
+        public float SimulationSpeed { get; } = 1f;
         public Random Random { get; }
         public float FieldRadius { get; } = 5f;
         public float GoalRadius { get; } = 1f;
         
         public Vector3 GoalPosition(int teamIndex) => _goalPositions[teamIndex];
         
-        public SimulationEntity GetPlayerByRole(int teamIndex, PlayerRole role)
+        public ITeamMember GetPlayerByRole(int teamIndex, PlayerRole role)
         {
-            foreach (var player in _teams[teamIndex].Players)
+            foreach (var teamMember in _teams[teamIndex].TeamMembers)
             {
-                var teamMember = player as ITeamMember;
-                if (teamMember.Role == role) return player;
+                if (teamMember.Role == role) return teamMember;
             }
             return null;
         }
 
-        public SimulationEntity Ball { get; }
+        public ISimulationEntity Ball { get; }
         public Team GetTeam(int teamIndex) => _teams[teamIndex];
         
-        public StandardMatch(IFormationFactory formationFactory, SimulationEntity ball, Team[] teams, Random random)
+        public StandardMatch(IFormationFactory formationFactory, ISimulationEntity ball, Team[] teams, Random random)
         {
             FormationFactory = formationFactory;
             Random = random;
@@ -45,10 +45,10 @@ namespace Game.Simulation.Match
 
             for (var i = 0; i < teams.Length; i++)
             {
-                foreach (var simulationEntity in teams[i].Players)
+                foreach (var teamMember in teams[i].TeamMembers)
                 {
-                    var player = (ITeamMember)simulationEntity;
-                    player.SetContext(this);
+                    teamMember.SetContext(this);
+                    teamMember.AssignOpposingTeam((i + 1) % teams.Length);
                 }
             }
             
@@ -56,7 +56,7 @@ namespace Game.Simulation.Match
             _goalPositions[0] = new Vector3(0f, 0f, -FieldRadius);
             _goalPositions[1] = new Vector3(0f, 0f, FieldRadius);
             
-            Points = new int[_teams.Length];
+            _points = new int[_teams.Length];
         }
 
         public void Dispose()
@@ -72,9 +72,10 @@ namespace Game.Simulation.Match
         public void Tick(float deltaTime)
         {
             if (!_isPlaying) return;
+            var adjustedDeltaTime = deltaTime * SimulationSpeed;
             if (_resetCooldown > 0)
             {
-                _resetCooldown -= deltaTime;
+                _resetCooldown -= adjustedDeltaTime;
                 return;
             }
 
@@ -84,12 +85,12 @@ namespace Game.Simulation.Match
                 return;
             }
             
-            Ball.Tick(deltaTime);
+            Ball.Tick(adjustedDeltaTime);
             foreach (var team in _teams)
             {
-                foreach (var player in team.Players)
+                foreach (var player in team.Entities)
                 {
-                    player.Tick(deltaTime);
+                    player.Tick(adjustedDeltaTime);
                 }
             }
 
@@ -122,7 +123,7 @@ namespace Game.Simulation.Match
             Ball.Reset();
             foreach (var team in _teams)
             {
-                foreach (var player in team.Players)
+                foreach (var player in team.Entities)
                 {
                     player.Reset();
                 }

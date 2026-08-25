@@ -1,5 +1,6 @@
 using System;
 using Game.Simulation.Logic;
+using Game.Simulation.Match;
 
 namespace Game.Simulation.Entities
 {
@@ -18,19 +19,19 @@ namespace Game.Simulation.Entities
         {
             var players = new []
             {
-                GetNewPlayer(PlayerRole.ForwardLeft, teamIndex),
-                GetNewPlayer(PlayerRole.ForwardRight, teamIndex),
-                GetNewPlayer(PlayerRole.Center, teamIndex),
-                GetNewPlayer(PlayerRole.DefenseLeft, teamIndex),
-                GetNewPlayer(PlayerRole.DefenseRight, teamIndex),
-                GetNewPlayer(PlayerRole.Keeper, teamIndex)
+                GetNewTeamMember(PlayerRole.ForwardLeft, teamIndex),
+                GetNewTeamMember(PlayerRole.ForwardRight, teamIndex),
+                GetNewTeamMember(PlayerRole.Center, teamIndex),
+                GetNewTeamMember(PlayerRole.DefenseLeft, teamIndex),
+                GetNewTeamMember(PlayerRole.DefenseRight, teamIndex),
+                GetNewTeamMember(PlayerRole.Keeper, teamIndex)
             };
             return new Team(players);
         }
 
-        public SimulationEntity GetNewPlayer(PlayerRole role, int teamIndex)
+        public ITeamMember GetNewTeamMember(PlayerRole role, int teamIndex)
         {
-            var player = new StandardPlayer(GetRandomPlayerStats(), role, teamIndex);
+            var player = new StandardTeamMember(GetRandomPlayerStats(), role, teamIndex) as ITeamMember;
             player.SetLogic(_logicFactory.CreateLogicNodes(role));
             return player;
         }
@@ -40,12 +41,13 @@ namespace Game.Simulation.Entities
             var playerStats = new PlayerStats
             {
                 Accuracy = _random.Next(1, 11),
-                Acceleration = _random.Next(1, 11),
+                Range = _random.Next(1, 11),
                 Speed = _random.Next(1, 11),
                 Agility = _random.Next(1, 11),
                 Intercept = _random.Next(1, 11),
                 KickPower = _random.Next(1, 11),
                 Mass = _random.Next(1, 11),
+                Drag = _random.Next(1, 11),
             };
             return playerStats;
         }
