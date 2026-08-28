@@ -6,7 +6,7 @@ namespace Game.Simulation.Strategies
 {
     public class Dribble : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardTeamMember teamMember)
+        public void Execute(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             var goalPosition = context.GoalPosition(teamMember.Team);
             var goalDirection = Vector3.Normalize(goalPosition - teamMember.CurrentPosition);

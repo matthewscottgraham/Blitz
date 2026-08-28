@@ -5,7 +5,7 @@ namespace Game.Simulation.Strategies
 {
     public class MarkPlayer : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardTeamMember teamMember)
+        public void Execute(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             var markedPlayer = context.GetPlayerByRole(teamMember.OpposingTeam, teamMember.MarkedPlayerRole);
             if (markedPlayer == null) return;

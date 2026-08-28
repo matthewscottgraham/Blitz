@@ -7,7 +7,7 @@ namespace Game.Simulation.Strategies
 {
     public class KickBallTowardsGoal : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardTeamMember  teamMember)
+        public void Execute(ISimulationContext context, ISimulationTeamMember  teamMember)
         {
             var targetGoalPosition = context.GoalPosition((teamMember.Team + 1) % 2);
             var adjustedGoalPosition = targetGoalPosition.ApplyStatNoise(context.Random, teamMember.Stats.Accuracy);

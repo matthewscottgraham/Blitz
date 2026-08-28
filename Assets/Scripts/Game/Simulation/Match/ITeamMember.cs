@@ -8,6 +8,8 @@ namespace Game.Simulation.Match
         int OpposingTeam { get; }
         PlayerRole Role { get; }
         PlayerRole MarkedPlayerRole { get; }
+        PlayerStats Stats { get; }
+        
         public abstract void AssignTeam(int team);
         public abstract void AssignOpposingTeam(int opposingTeam);
         public abstract void SetContext(ISimulationContext simulationContext);

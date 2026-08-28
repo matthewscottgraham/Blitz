@@ -6,7 +6,7 @@ namespace Game.Simulation.Strategies
 {
     public class StandGround : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardTeamMember teamMember)
+        public void Execute(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             var direction = 
                 context.FormationFactory.GetFormationPosition(FormationType.Standard, teamMember.Team, teamMember.Role) 

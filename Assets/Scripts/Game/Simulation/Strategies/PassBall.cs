@@ -7,7 +7,7 @@ namespace Game.Simulation.Strategies
 {
     public class PassBall : IStrategy
     {
-        public void Execute(ISimulationContext context, StandardTeamMember  teamMember)
+        public void Execute(ISimulationContext context, ISimulationTeamMember  teamMember)
         {
             var teamMembers = context.GetTeam(teamMember.Team).TeamMembers;
             ISimulationTeamMember closestPlayer = null;

@@ -8,7 +8,7 @@ namespace Game.Simulation.Strategies
     {
         private const float AvoidRadius = 1f;
         
-        public void Execute(ISimulationContext context, StandardTeamMember teamMember)
+        public void Execute(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             var direction = 
                 MathUtility.RandomPointInSphere(teamMember.CurrentPosition, AvoidRadius, context.Random)
