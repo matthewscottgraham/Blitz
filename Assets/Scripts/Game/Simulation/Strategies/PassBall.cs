@@ -9,13 +9,13 @@ namespace Game.Simulation.Strategies
     {
         public void Execute(ISimulationContext context, StandardTeamMember  teamMember)
         {
-            var teamMates = context.GetTeam(teamMember.Team);
-            ISimulationEntity closestPlayer = null;
+            var teamMembers = context.GetTeam(teamMember.Team).TeamMembers;
+            ISimulationTeamMember closestPlayer = null;
             var closestDistance = float.MaxValue;
-            foreach (var teamMate in teamMates.Entities)
+            foreach (var teamMate in teamMembers)
             {
                 if (teamMate == teamMember) continue;
-                var distance = Vector3.Distance(teamMate.CurrentPosition, context.GoalPosition((teamMember.Team + 1) % 2));
+                var distance = Vector3.Distance(teamMate.CurrentPosition, context.GoalPosition(teamMate.OpposingTeam));
                 if (!(distance < closestDistance)) continue;
                 closestPlayer = teamMate;
                 closestDistance = distance;

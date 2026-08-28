@@ -8,7 +8,8 @@ namespace Game.Simulation.Conditions
     {
         public bool IsConditionMet(ISimulationContext context, StandardTeamMember teamMember)
         {
-            return Vector3.Distance(teamMember.CurrentPosition, context.GoalPosition(teamMember.Team)) <= teamMember.Stats.Range;
+            return Vector3.Distance(teamMember.CurrentPosition, context.GoalPosition(teamMember.OpposingTeam)) 
+                   <= teamMember.Stats.Range;
         }
     }
 }

@@ -15,6 +15,6 @@ namespace Game.Simulation.Match
         public int[]  Points { get; }
         Team GetTeam(int index);
         Vector3 GoalPosition(int teamIndex);
-        ITeamMember GetPlayerByRole(int teamIndex, PlayerRole role);
+        ISimulationTeamMember GetPlayerByRole(int teamIndex, PlayerRole role);
     }
 }

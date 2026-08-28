@@ -9,9 +9,8 @@ namespace Game.Simulation.Strategies
         {
             var markedPlayer = context.GetPlayerByRole(teamMember.OpposingTeam, teamMember.MarkedPlayerRole);
             if (markedPlayer == null) return;
-
-            var markedEntity = (ISimulationEntity)markedPlayer;
-            var direction = markedEntity.CurrentPosition - teamMember.CurrentPosition;
+            
+            var direction = markedPlayer.CurrentPosition - teamMember.CurrentPosition;
             teamMember.ApplyForce(direction, teamMember.Stats.Speed * 10f);
         }
     }

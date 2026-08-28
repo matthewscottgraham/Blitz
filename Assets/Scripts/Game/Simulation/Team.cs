@@ -7,23 +7,16 @@ namespace Game.Simulation
 {
     public class Team : IDisposable
     {
-        public ITeamMember[] TeamMembers;
-        public ISimulationEntity[] Entities;
+        public ISimulationTeamMember[] TeamMembers;
 
-        public Team(ITeamMember[] teamMembers)
+        public Team(ISimulationTeamMember[] teamMembers)
         {
             TeamMembers = teamMembers;
-            Entities = new ISimulationEntity[TeamMembers.Length];
-            for (var i = 0; i < TeamMembers.Length; i++)
-            {
-                Entities[i] = (ISimulationEntity) TeamMembers[i];
-            }
         }
 
         public void Dispose()
         {
             TeamMembers = null;
-            Entities = null;
         }
     }
 }

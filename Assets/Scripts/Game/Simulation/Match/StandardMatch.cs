@@ -24,7 +24,7 @@ namespace Game.Simulation.Match
         
         public Vector3 GoalPosition(int teamIndex) => _goalPositions[teamIndex];
         
-        public ITeamMember GetPlayerByRole(int teamIndex, PlayerRole role)
+        public ISimulationTeamMember GetPlayerByRole(int teamIndex, PlayerRole role)
         {
             foreach (var teamMember in _teams[teamIndex].TeamMembers)
             {
@@ -88,7 +88,7 @@ namespace Game.Simulation.Match
             Ball.Tick(adjustedDeltaTime);
             foreach (var team in _teams)
             {
-                foreach (var player in team.Entities)
+                foreach (var player in team.TeamMembers)
                 {
                     player.Tick(adjustedDeltaTime);
                 }
@@ -123,7 +123,7 @@ namespace Game.Simulation.Match
             Ball.Reset();
             foreach (var team in _teams)
             {
-                foreach (var player in team.Entities)
+                foreach (var player in team.TeamMembers)
                 {
                     player.Reset();
                 }

@@ -15,7 +15,7 @@ namespace Game.Simulation.Entities
         public void Tick(float deltaTime)
         {
             _currentPosition += _currentVelocity * deltaTime;
-            _currentVelocity *= DragCoefficient;
+            _currentVelocity *= 1 - DragCoefficient;
         }
 
         public void ApplyForce(Vector3 direction, float magnitude)

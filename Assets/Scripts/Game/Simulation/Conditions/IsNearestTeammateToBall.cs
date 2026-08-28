@@ -10,7 +10,7 @@ namespace Game.Simulation.Conditions
         {
             var teamMates = simulationContext.GetTeam(teamMember.Team);
             var playerDistance = Vector3.Distance(teamMember.CurrentPosition, simulationContext.Ball.CurrentPosition);
-            foreach (var teamMate in teamMates.Entities)
+            foreach (var teamMate in teamMates.TeamMembers)
             {
                 if (Vector3.Distance(teamMate.CurrentPosition, simulationContext.Ball.CurrentPosition) < playerDistance)
                     return false;

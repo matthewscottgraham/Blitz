@@ -6,7 +6,7 @@ using Game.Simulation.Match;
 
 namespace Game.Simulation.Entities
 {
-    public class StandardTeamMember : ISimulationEntity, ITeamMember
+    public class StandardTeamMember : ISimulationTeamMember
     {
         private LogicNode[] _logicNodes = Array.Empty<LogicNode>();
         private ISimulationContext _simulationContext;
@@ -81,7 +81,7 @@ namespace Game.Simulation.Entities
                 _currentVelocity = Vector3.Normalize(CurrentVelocity) * Stats.Speed;
             
             _currentPosition += CurrentVelocity * deltaTime;
-            _currentVelocity *= Stats.Drag;
+            _currentVelocity *= 1 - Stats.Drag / 100f;
         }
     }
 }

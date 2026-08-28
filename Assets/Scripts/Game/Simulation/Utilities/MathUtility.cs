@@ -12,7 +12,7 @@ namespace Game.Simulation.Utilities
 
         public static Vector3 ApplyStatNoise(this Vector3 position, Random random, float accuracy)
         {
-            return new Vector3(
+            return position + new Vector3(
                 (float)(random.NextDouble() - 0.5f) * 2,
                 (float)(random.NextDouble() - 0.5f) * 2,
                 (float)(random.NextDouble() - 0.5f) * 2

@@ -1,6 +1,5 @@
 using System;
 using Game.Simulation.Logic;
-using Game.Simulation.Match;
 
 namespace Game.Simulation.Entities
 {
@@ -29,9 +28,9 @@ namespace Game.Simulation.Entities
             return new Team(players);
         }
 
-        public ITeamMember GetNewTeamMember(PlayerRole role, int teamIndex)
+        public ISimulationTeamMember GetNewTeamMember(PlayerRole role, int teamIndex)
         {
-            var player = new StandardTeamMember(GetRandomPlayerStats(), role, teamIndex) as ITeamMember;
+            var player = new StandardTeamMember(GetRandomPlayerStats(), role, teamIndex);
             player.SetLogic(_logicFactory.CreateLogicNodes(role));
             return player;
         }
