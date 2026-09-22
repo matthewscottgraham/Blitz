@@ -81,7 +81,7 @@ namespace Game.Simulation.Entities
                 _currentVelocity = Vector3.Normalize(CurrentVelocity) * Stats.Speed;
             
             _currentPosition += CurrentVelocity * deltaTime;
-            _currentVelocity *= 1 - Stats.Drag / 100f;
+            _currentVelocity *= 1 - Stats.Drag / 100f * deltaTime;
         }
     }
 }

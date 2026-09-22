@@ -19,6 +19,7 @@ namespace Game.Simulation.Formations
 
         private static Vector3 AdjustPositionForTeam(Vector3 position, int teamIndex)
         {
+            // Essentially rotate the team around the centre of the field.
             var mult = teamIndex == 0 ? -1 : 1;
             return new Vector3(position.X * mult, position.Y, position.Z * mult);
         }

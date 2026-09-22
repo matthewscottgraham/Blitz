@@ -99,6 +99,7 @@ namespace Game.Simulation.Match
 
         public void StartMatch()
         {
+            ResetPlay();
             _isPlaying = true;
         }
 

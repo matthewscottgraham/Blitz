@@ -8,7 +8,7 @@ namespace Game.Simulation.Strategies
     {
         public void Execute(ISimulationContext context, ISimulationTeamMember teamMember)
         {
-            var goalPosition = context.GoalPosition(teamMember.Team);
+            var goalPosition = context.GoalPosition(teamMember.OpposingTeam);
             var goalDirection = Vector3.Normalize(goalPosition - teamMember.CurrentPosition);
             var idealBallPosition = teamMember.CurrentPosition + goalDirection * 0.5f;
             var ballCorrection =  idealBallPosition - context.Ball.CurrentPosition;
