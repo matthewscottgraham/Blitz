@@ -6,13 +6,14 @@ namespace Game.Simulation.Conditions
 {
     public class IsOpponentCloseToPlayer : ICondition
     {
-        private const float Radius = 0.5f;
+        private const float PlayerInterceptRadius = TuningConfig.PlayerInterceptRadius;
+        
         public bool IsConditionMet(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             var otherTeam = context.GetTeam(teamMember.OpposingTeam);
             foreach (var opponent in otherTeam.TeamMembers)
             {
-                if (MathUtility.IsWithinRadius(teamMember.CurrentPosition, opponent.CurrentPosition, Radius))
+                if (MathUtility.IsWithinRadius(teamMember.CurrentPosition, opponent.CurrentPosition, PlayerInterceptRadius))
                     return true;
             }
             return false;

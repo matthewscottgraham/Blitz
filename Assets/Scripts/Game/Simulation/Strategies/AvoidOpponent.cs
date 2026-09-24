@@ -6,8 +6,8 @@ namespace Game.Simulation.Strategies
 {
     public class AvoidOpponent : IStrategy
     {
-        private const float AvoidRadius = 1f;
-        
+        private const float AvoidRadius = TuningConfig.PlayerAvoidRadius;
+
         public void Execute(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             var direction = 

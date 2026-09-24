@@ -6,10 +6,12 @@ namespace Game.Simulation.Conditions
 {
     public class IsPlayerCloseToBall : ICondition
     {
+        private const float PlayerInterceptMultiplier = TuningConfig.PlayerInterceptMultiplier;
+        
         public bool IsConditionMet(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             return MathUtility.IsWithinRadius(teamMember.CurrentPosition, context.Ball.CurrentPosition,
-                teamMember.Stats.Intercept / 10f);
+                teamMember.Stats.Intercept * PlayerInterceptMultiplier);
         }
     }
 }

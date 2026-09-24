@@ -6,11 +6,12 @@ namespace Game.Simulation.Conditions
 {
     public class IsPlayerAbleToReachBall : ICondition
     {
-        private const float Radius = 1f;
+        private const float PlayerInterceptRadius = TuningConfig.PlayerInterceptRadius;
+        
         public bool IsConditionMet(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             return MathUtility.IsWithinRadius(teamMember.CurrentPosition, context.Ball.CurrentPosition,
-                Radius);
+                PlayerInterceptRadius);
         }
     }
 }

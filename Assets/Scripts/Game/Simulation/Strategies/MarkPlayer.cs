@@ -5,13 +5,15 @@ namespace Game.Simulation.Strategies
 {
     public class MarkPlayer : IStrategy
     {
+        private const float PlayerSpeedMultiplier = TuningConfig.PlayerSpeedMultiplier;
+        
         public void Execute(ISimulationContext context, ISimulationTeamMember teamMember)
         {
             var markedPlayer = context.GetPlayerByRole(teamMember.OpposingTeam, teamMember.MarkedPlayerRole);
             if (markedPlayer == null) return;
             
             var direction = markedPlayer.CurrentPosition - teamMember.CurrentPosition;
-            teamMember.ApplyForce(direction, teamMember.Stats.Speed * 10f);
+            teamMember.ApplyForce(direction, teamMember.Stats.Speed * PlayerSpeedMultiplier);
         }
     }
 }
